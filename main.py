@@ -1,1 +1,3 @@
-print(pito)
+#importar clases despues
+def main():
+    pass
