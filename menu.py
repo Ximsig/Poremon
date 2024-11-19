@@ -1,3 +1,5 @@
 #importar clases despues
-def main():
-    pass
+def menu():
+    print("¡Bienvenido a Poremon!")
+    opc= int(input("Seleccione una opción del menú"))
+    
