@@ -1,4 +1,4 @@
-def main_menu():
+def menu():
     """
     Menú principal del programa.
     """
@@ -34,4 +34,4 @@ def main_menu():
 
 # Llamar al menú principal si el script se ejecuta directamente
 if __name__ == "__main__":
-    main_menu()
+    menu()
