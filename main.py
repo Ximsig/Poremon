@@ -12,7 +12,7 @@ def main():
     print("="*50)
     
     # Llamar al menú principal
-    main_menu()
+    menu()
     
     print("\n" + "="*50)
     print("        ¡Hasta Pronto!       ")
