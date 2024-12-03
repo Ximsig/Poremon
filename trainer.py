@@ -1,7 +1,7 @@
-from EquipoPokemon import equipo_pokemon
+from EquipoPokemon import EquipoPokemon
 
 class Trainer:
-    def __init__(self, Nombre: str, Edad: int, Ciudad: str, Equipo: equipo_pokemon):
+    def __init__(self, Nombre: str, Edad: int, Ciudad: str, Equipo: EquipoPokemon):
         '''
         Clase entrenador:
         Recibe un nombre, edad, ciudad y un objeto de la clase equipo pokemon

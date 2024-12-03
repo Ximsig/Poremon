@@ -40,7 +40,27 @@ efectividades = {
     'Volador': ['Bicho', 'Lucha', 'Planta']
 }
 
-# Ataques disponibles
+inmunidades = {
+    'Acero': ['Veneno'],
+    'Agua': [],
+    'Bicho': [],
+    'Dragón': [],
+    'Eléctrico': [],
+    'Fantasma': ['Normal', 'Lucha'],
+    'Fuego': [],
+    'Hada': ['Dragón'],
+    'Hielo': [],
+    'Lucha': ['Fantasma'],
+    'Normal': ['Fantasma'],
+    'Planta': [],
+    'Psíquico': ['Fantasma'],
+    'Roca': [],
+    'Siniestro': ['Psíquico'],
+    'Tierra': ['Eléctrico'],
+    'Veneno': [],
+    'Volador': ['Tierra']
+}
+
 habilidades = {
     "Impactrueno": {
         "daño": 40,
@@ -52,7 +72,7 @@ habilidades = {
         "daño": 20,
         "tipo_habilidad": "multiple",
         "tipo": "Normal",
-        "estado": None
+        "estado": "normal"
     },
     "Lanzallamas": {
         "daño": 90,
@@ -62,9 +82,9 @@ habilidades = {
     },
     "Hidrobomba": {
         "daño": 110,
-        "tipo_habilidad": "efecto",
+        "tipo_habilidad": "normal",
         "tipo": "Agua",
-        "estado": None
+        "estado": "normal"
     },
     "Rayo Hielo": {
         "daño": 80,
@@ -76,19 +96,19 @@ habilidades = {
         "daño": 75,
         "tipo_habilidad": "normal",
         "tipo": "Planta",
-        "estado": None
+        "estado": "normal"
     },
     "Tornado": {
-        "daño": 60,
-        "tipo_habilidad": "normal",
+        "daño": 40,
+        "tipo_habilidad": "multiple",
         "tipo": "Volador",
-        "estado": None
+        "estado": "normal"
     },
     "Golpe Roca": {
         "daño": 50,
         "tipo_habilidad": "efecto",
         "tipo": "Roca",
-        "estado": "Normal"
+        "estado": "confuso"
     },
     "Psicorrayo": {
         "daño": 65,
@@ -100,7 +120,7 @@ habilidades = {
         "daño": 40,
         "tipo_habilidad": "normal",
         "tipo": "Dragón",
-        "estado": None
+        "estado": "normal"
     },
     "Puño Trueno": {
         "daño": 75,
@@ -112,13 +132,13 @@ habilidades = {
         "daño": 80,
         "tipo_habilidad": "efecto",
         "tipo": "Fantasma",
-        "estado": None
+        "estado": "confuso"
     },
     "Terremoto": {
-        "daño": 25,
+        "daño": 40,
         "tipo_habilidad": "multiple",
         "tipo": "Tierra",
-        "estado": None
+        "estado": "normal"
     },
     "Veneno X": {
         "daño": 60,
@@ -130,7 +150,7 @@ habilidades = {
         "daño": 120,
         "tipo_habilidad": "normal",
         "tipo": "Planta",
-        "estado": None
+        "estado": "normal"
     },
     "Colmillo Ígneo": {
         "daño": 65,
@@ -142,28 +162,51 @@ habilidades = {
         "daño": 60,
         "tipo_habilidad": "normal",
         "tipo": "Volador",
-        "estado": None
+        "estado": "normal"
     },
     "Chispazo": {
-        "daño": 70,
+        "daño": 30,
         "tipo_habilidad": "multiple",
+        "tipo": "Eléctrico",
+        "estado": "normal"
+    },
+    "Pistola Agua": {
+        "daño": 40,
+        "tipo_habilidad": "normal",
+        "tipo": "Agua",
+        "estado": "normal"
+    },
+    "Alarido": {
+        "daño": 55,
+        "tipo_habilidad": "efecto",
+        "tipo": "Siniestro",
+        "estado": "confuso"
+    },
+    "Doble Golpe": {
+        "daño": 15,
+        "tipo_habilidad": "multiple",
+        "tipo": "Normal",
+        "estado": "normal"
+    },
+    "Colmillo Rayo": {
+        "daño": 65,
+        "tipo_habilidad": "efecto",
         "tipo": "Eléctrico",
         "estado": "paralizado"
     },
-    "Pistola Agua": {
-        "daño": 55,
-        "tipo_habilidad": "normal",
-        "tipo": "Agua",
-        "estado": None
-    },
-    "Alarido": {
-        "daño": 70,
+    "Polvo Veneno": {
+        "daño": 0,
         "tipo_habilidad": "efecto",
-        "tipo": "Siniestro",
-        "estado": None
+        "tipo": "Veneno",
+        "estado": "envenenado"
+    },
+    "Hipnosis": {
+        "daño": 0,
+        "tipo_habilidad": "efecto",
+        "tipo": "Psíquico",
+        "estado": "dormido"
     }
 }
-
 # Permite mostrar al usuario todas las habilidades disponibles
 
 def mostrar_habilidades(habilidades=habilidades): # mostrar habilidades disponibles
