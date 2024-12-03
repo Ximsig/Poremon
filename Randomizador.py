@@ -1,5 +1,5 @@
 import random
-from personaje import Personaje  # Importamos la clase Personaje del archivo correspondiente
+from trainer import Entrenador  # Importamos la clase Personaje del archivo correspondiente
 from equipo_pokemon import equipo_pokemon  # Importamos la función para generar equipos
 
 class TorneoPokemon:
@@ -11,7 +11,7 @@ class TorneoPokemon:
         for i in range(self.max_players):
             nombre = f'Entrenador_{i + 1}'  # Creamos nombres de entrenadores
             equipo = equipo_pokemon()  # Generamos el equipo para cada jugador
-            jugador = Personaje(nombre, equipo)  # Creamos una instancia de Personaje
+            jugador = Entrenador(nombre, equipo)  # Creamos una instancia de Personaje
             self.jugadores.append(jugador)
 
     def randomizar_jugadores(self):
