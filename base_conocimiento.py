@@ -40,6 +40,27 @@ efectividades = {
     'Volador': ['Bicho', 'Lucha', 'Planta']
 }
 
+inmunidades = {
+    'Acero': ['Veneno'],
+    'Agua': [],
+    'Bicho': [],
+    'Dragón': [],
+    'Eléctrico': [],
+    'Fantasma': ['Normal', 'Lucha'],
+    'Fuego': [],
+    'Hada': ['Dragón'],
+    'Hielo': [],
+    'Lucha': ['Fantasma'],
+    'Normal': ['Fantasma'],
+    'Planta': [],
+    'Psíquico': ['Fantasma'],
+    'Roca': [],
+    'Siniestro': ['Psíquico'],
+    'Tierra': ['Eléctrico'],
+    'Veneno': [],
+    'Volador': ['Tierra']
+}
+
 habilidades = {
     "Impactrueno": {
         "daño": 40,
@@ -51,7 +72,7 @@ habilidades = {
         "daño": 20,
         "tipo_habilidad": "multiple",
         "tipo": "Normal",
-        "estado": None  # No inflige estado
+        "estado": "normal"
     },
     "Lanzallamas": {
         "daño": 90,
@@ -61,9 +82,9 @@ habilidades = {
     },
     "Hidrobomba": {
         "daño": 110,
-        "tipo_habilidad": "efecto",
+        "tipo_habilidad": "normal",
         "tipo": "Agua",
-        "estado": None
+        "estado": "normal"
     },
     "Rayo Hielo": {
         "daño": 80,
@@ -73,21 +94,21 @@ habilidades = {
     },
     "Gigadrenado": {
         "daño": 75,
-        "tipo_habilidad": "curación",
+        "tipo_habilidad": "normal",
         "tipo": "Planta",
-        "estado": None
+        "estado": "normal"
     },
     "Tornado": {
-        "daño": 60,
-        "tipo_habilidad": "daño continuo",
+        "daño": 40,
+        "tipo_habilidad": "multiple",
         "tipo": "Volador",
-        "estado": None
+        "estado": "normal"
     },
     "Golpe Roca": {
         "daño": 50,
         "tipo_habilidad": "efecto",
         "tipo": "Roca",
-        "estado": "atontado"
+        "estado": "confuso"
     },
     "Psicorrayo": {
         "daño": 65,
@@ -97,9 +118,9 @@ habilidades = {
     },
     "Furia Dragón": {
         "daño": 40,
-        "tipo_habilidad": "daño fijo",
+        "tipo_habilidad": "normal",
         "tipo": "Dragón",
-        "estado": None
+        "estado": "normal"
     },
     "Puño Trueno": {
         "daño": 75,
@@ -111,13 +132,13 @@ habilidades = {
         "daño": 80,
         "tipo_habilidad": "efecto",
         "tipo": "Fantasma",
-        "estado": "bajado defensa especial"
+        "estado": "confuso"
     },
     "Terremoto": {
-        "daño": 100,
+        "daño": 40,
         "tipo_habilidad": "multiple",
         "tipo": "Tierra",
-        "estado": None
+        "estado": "normal"
     },
     "Veneno X": {
         "daño": 60,
@@ -127,9 +148,9 @@ habilidades = {
     },
     "Rayo Solar": {
         "daño": 120,
-        "tipo_habilidad": "carga",
+        "tipo_habilidad": "normal",
         "tipo": "Planta",
-        "estado": None
+        "estado": "normal"
     },
     "Colmillo Ígneo": {
         "daño": 65,
@@ -139,26 +160,50 @@ habilidades = {
     },
     "Ataque Ala": {
         "daño": 60,
-        "tipo_habilidad": "directo",
+        "tipo_habilidad": "normal",
         "tipo": "Volador",
-        "estado": None
+        "estado": "normal"
     },
     "Chispazo": {
-        "daño": 70,
+        "daño": 30,
         "tipo_habilidad": "multiple",
         "tipo": "Eléctrico",
-        "estado": "paralizado"
+        "estado": "normal"
     },
     "Pistola Agua": {
         "daño": 40,
-        "tipo_habilidad": "directo",
+        "tipo_habilidad": "normal",
         "tipo": "Agua",
-        "estado": None
+        "estado": "normal"
     },
     "Alarido": {
         "daño": 55,
         "tipo_habilidad": "efecto",
         "tipo": "Siniestro",
-        "estado": "bajado ataque especial"
+        "estado": "confuso"
+    },
+    "Doble Golpe": {
+        "daño": 15,
+        "tipo_habilidad": "multiple",
+        "tipo": "Normal",
+        "estado": "normal"
+    },
+    "Colmillo Rayo": {
+        "daño": 65,
+        "tipo_habilidad": "efecto",
+        "tipo": "Eléctrico",
+        "estado": "paralizado"
+    },
+    "Polvo Veneno": {
+        "daño": 0,
+        "tipo_habilidad": "efecto",
+        "tipo": "Veneno",
+        "estado": "envenenado"
+    },
+    "Hipnosis": {
+        "daño": 0,
+        "tipo_habilidad": "efecto",
+        "tipo": "Psíquico",
+        "estado": "dormido"
     }
 }

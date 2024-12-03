@@ -9,6 +9,7 @@ class EstadoPokemon(Enum):
     DORMIDO = "dormido"
     QUEMADO = "quemado"
     CONFUSO = "confuso"
+    CONGELADO = "congelado"
 
 class TipoHabilidad(Enum):
     NORMAL = "normal"
@@ -48,10 +49,10 @@ class Pokemon:
                 enemigo.RecibirDanyo(danyo)
             
     def RecibirDanyo(self,danyo,tipo): #Recibe daño en base del ataque anterior y de su tipo
-        if tipo not in inmunes:
-            if tipo in debilidades:
+        if tipo not in inmunidades[self.tipo]:
+            if tipo in debilidades[self.tipo]:
                 danyo *= 0.5
-            elif tipo in criticos:
+            elif tipo in efectividades[self.tipo]:
                 danyo *= 2
             self.salud -= danyo
             if self.salud <= 0:
@@ -80,6 +81,7 @@ class Pokemon:
             EstadoPokemon.PARALIZADO: self.paralizado,
             EstadoPokemon.DORMIDO: self.dormido,
             EstadoPokemon.CONFUSO: self.confuso,
+            EstadoPokemon.CONGELADO: self.congelado,
         }
 
         if self.estado in estados_efectos:
@@ -125,6 +127,14 @@ class Pokemon:
         else:
             auto_danyo = random.randint(5,15)
             self.salud -= auto_danyo
+            return False
+        
+        return True
+    
+    def congelado(self):
+        if random.random < 0.5:
+            self.estado = EstadoPokemon.NORMAL
+        else:
             return False
         
         return True
