@@ -1,5 +1,6 @@
 from enum import Enum
 import random
+from base_conocimiento import *
 
 class EstadoPokemon(Enum):
     NORMAL = "normal"
@@ -47,17 +48,19 @@ class Pokemon:
                 enemigo.RecibirDanyo(danyo)
             
     def RecibirDanyo(self,danyo,tipo): #Recibe daño en base del ataque anterior y de su tipo
-        if tipo in debilidades:
-            danyo *= 0.5
-        elif tipo in criticos:
-            danyo *= 2
-        self.salud -= danyo
-        if self.salud <= 0:
-            self.salud = 0
-            print(f"{self.nombre} ha sido derrotado")
-        
+        if tipo not in inmunes:
+            if tipo in debilidades:
+                danyo *= 0.5
+            elif tipo in criticos:
+                danyo *= 2
+            self.salud -= danyo
+            if self.salud <= 0:
+                self.salud = 0
+                print(f"{self.nombre} ha sido derrotado")
+            else:
+                print(f"{self.nombre} ahora tiene {self.salud} puntos de salud")
         else:
-            print(f"{self.nombre} ahora tiene {self.salud} puntos de salud")
+            print("No ha tenido efecto")
             
     def CambiarEstado(self,estado): #Retorna el estado actual del pokemon
         self.estado = estado
@@ -133,4 +136,3 @@ class Pokemon:
         print(self.habilidades)
         print(self.tipo)
         print(self.estado)
-    s
