@@ -51,7 +51,7 @@ habilidades = {
         "daño": 20,
         "tipo_habilidad": "multiple",
         "tipo": "Normal",
-        "estado": None  # No inflige estado
+        "estado": None
     },
     "Lanzallamas": {
         "daño": 90,
@@ -73,13 +73,13 @@ habilidades = {
     },
     "Gigadrenado": {
         "daño": 75,
-        "tipo_habilidad": "curación",
+        "tipo_habilidad": "normal",
         "tipo": "Planta",
         "estado": None
     },
     "Tornado": {
         "daño": 60,
-        "tipo_habilidad": "daño continuo",
+        "tipo_habilidad": "normal",
         "tipo": "Volador",
         "estado": None
     },
@@ -87,7 +87,7 @@ habilidades = {
         "daño": 50,
         "tipo_habilidad": "efecto",
         "tipo": "Roca",
-        "estado": "atontado"
+        "estado": "Normal"
     },
     "Psicorrayo": {
         "daño": 65,
@@ -97,7 +97,7 @@ habilidades = {
     },
     "Furia Dragón": {
         "daño": 40,
-        "tipo_habilidad": "daño fijo",
+        "tipo_habilidad": "normal",
         "tipo": "Dragón",
         "estado": None
     },
@@ -111,10 +111,10 @@ habilidades = {
         "daño": 80,
         "tipo_habilidad": "efecto",
         "tipo": "Fantasma",
-        "estado": "bajado defensa especial"
+        "estado": None
     },
     "Terremoto": {
-        "daño": 100,
+        "daño": 25,
         "tipo_habilidad": "multiple",
         "tipo": "Tierra",
         "estado": None
@@ -127,7 +127,7 @@ habilidades = {
     },
     "Rayo Solar": {
         "daño": 120,
-        "tipo_habilidad": "carga",
+        "tipo_habilidad": "normal",
         "tipo": "Planta",
         "estado": None
     },
@@ -139,7 +139,7 @@ habilidades = {
     },
     "Ataque Ala": {
         "daño": 60,
-        "tipo_habilidad": "directo",
+        "tipo_habilidad": "normal",
         "tipo": "Volador",
         "estado": None
     },
@@ -150,15 +150,21 @@ habilidades = {
         "estado": "paralizado"
     },
     "Pistola Agua": {
-        "daño": 40,
-        "tipo_habilidad": "directo",
+        "daño": 55,
+        "tipo_habilidad": "normal",
         "tipo": "Agua",
         "estado": None
     },
     "Alarido": {
-        "daño": 55,
+        "daño": 70,
         "tipo_habilidad": "efecto",
         "tipo": "Siniestro",
-        "estado": "bajado ataque especial"
+        "estado": None
     }
 }
+
+def mostrar_habilidades(habilidades=habilidades): # mostrar habilidades disponibles
+    for idx, habilidad in enumerate(habilidades.keys()):
+        print(f'{idx}: {habilidad}  ', end='') if (idx % 5 != 0 or idx == 0) else print()
+
+mostrar_habilidades()
