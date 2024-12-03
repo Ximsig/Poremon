@@ -1,5 +1,3 @@
-
-
 debilidades = {
     'Acero' : ['Fuego','Lucha', 'Tierra'],
     'Agua' : ['Planta', 'Electrico'],
