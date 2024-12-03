@@ -39,3 +39,126 @@ efectividades = {
     'Veneno': ['Hada', 'Planta'],
     'Volador': ['Bicho', 'Lucha', 'Planta']
 }
+
+habilidades = {
+    "Impactrueno": {
+        "daño": 40,
+        "tipo_habilidad": "efecto",
+        "tipo": "Eléctrico",
+        "estado": "paralizado"
+    },
+    "Placaje": {
+        "daño": 20,
+        "tipo_habilidad": "multiple",
+        "tipo": "Normal",
+        "estado": None  # No inflige estado
+    },
+    "Lanzallamas": {
+        "daño": 90,
+        "tipo_habilidad": "efecto",
+        "tipo": "Fuego",
+        "estado": "quemado"
+    },
+    "Hidrobomba": {
+        "daño": 110,
+        "tipo_habilidad": "efecto",
+        "tipo": "Agua",
+        "estado": None
+    },
+    "Rayo Hielo": {
+        "daño": 80,
+        "tipo_habilidad": "efecto",
+        "tipo": "Hielo",
+        "estado": "congelado"
+    },
+    "Gigadrenado": {
+        "daño": 75,
+        "tipo_habilidad": "curación",
+        "tipo": "Planta",
+        "estado": None
+    },
+    "Tornado": {
+        "daño": 60,
+        "tipo_habilidad": "daño continuo",
+        "tipo": "Volador",
+        "estado": None
+    },
+    "Golpe Roca": {
+        "daño": 50,
+        "tipo_habilidad": "efecto",
+        "tipo": "Roca",
+        "estado": "atontado"
+    },
+    "Psicorrayo": {
+        "daño": 65,
+        "tipo_habilidad": "efecto",
+        "tipo": "Psíquico",
+        "estado": "confuso"
+    },
+    "Furia Dragón": {
+        "daño": 40,
+        "tipo_habilidad": "daño fijo",
+        "tipo": "Dragón",
+        "estado": None
+    },
+    "Puño Trueno": {
+        "daño": 75,
+        "tipo_habilidad": "efecto",
+        "tipo": "Eléctrico",
+        "estado": "paralizado"
+    },
+    "Bola Sombra": {
+        "daño": 80,
+        "tipo_habilidad": "efecto",
+        "tipo": "Fantasma",
+        "estado": "bajado defensa especial"
+    },
+    "Terremoto": {
+        "daño": 100,
+        "tipo_habilidad": "multiple",
+        "tipo": "Tierra",
+        "estado": None
+    },
+    "Veneno X": {
+        "daño": 60,
+        "tipo_habilidad": "efecto",
+        "tipo": "Veneno",
+        "estado": "envenenado"
+    },
+    "Rayo Solar": {
+        "daño": 120,
+        "tipo_habilidad": "carga",
+        "tipo": "Planta",
+        "estado": None
+    },
+    "Colmillo Ígneo": {
+        "daño": 65,
+        "tipo_habilidad": "efecto",
+        "tipo": "Fuego",
+        "estado": "quemado"
+    },
+    "Ataque Ala": {
+        "daño": 60,
+        "tipo_habilidad": "directo",
+        "tipo": "Volador",
+        "estado": None
+    },
+    "Chispazo": {
+        "daño": 70,
+        "tipo_habilidad": "multiple",
+        "tipo": "Eléctrico",
+        "estado": "paralizado"
+    },
+    "Pistola Agua": {
+        "daño": 40,
+        "tipo_habilidad": "directo",
+        "tipo": "Agua",
+        "estado": None
+    },
+    "Alarido": {
+        "daño": 55,
+        "tipo_habilidad": "efecto",
+        "tipo": "Siniestro",
+        "estado": "bajado ataque especial"
+    }
+}
