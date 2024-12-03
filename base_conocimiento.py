@@ -40,6 +40,7 @@ efectividades = {
     'Volador': ['Bicho', 'Lucha', 'Planta']
 }
 
+# Ataques disponibles
 habilidades = {
     "Impactrueno": {
         "daño": 40,
@@ -163,8 +164,12 @@ habilidades = {
     }
 }
 
+# Permite mostrar al usuario todas las habilidades disponibles
+
 def mostrar_habilidades(habilidades=habilidades): # mostrar habilidades disponibles
     for idx, habilidad in enumerate(habilidades.keys()):
         print(f'{idx}: {habilidad}  ', end='') if (idx % 5 != 0 or idx == 0) else print()
 
-mostrar_habilidades()
+
+if __name__ == '__main__':
+    mostrar_habilidades()
