@@ -25,7 +25,7 @@ class TorneoPokemon:
 
 # Ejemplo de uso
 if __name__ == "__main__":
-    max_players = 5  # Cambiar este valor según el número de jugadores que se deseen
+    max_players = 5  #CAMBIAR SEGUN NUMERO DE JUGADORES
     torneo = TorneoPokemon(max_players)
     torneo.agregar_jugadores()
     torneo.randomizar_jugadores()
