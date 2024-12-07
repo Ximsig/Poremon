@@ -1,3 +1,19 @@
+from enum import Enum
+
+class EstadoPokemon(Enum):
+    NORMAL = "normal"
+    ENVENENADO = "envenenado"
+    PARALIZADO = "paralizado"
+    DORMIDO = "dormido"
+    QUEMADO = "quemado"
+    CONFUSO = "confuso"
+    CONGELADO = "congelado"
+
+class TipoHabilidad(Enum):
+    NORMAL = "normal"
+    EFECTO = "efecto"
+    MULTIPLE = "multiple"
+
 debilidades = {
     'Acero' : ['Fuego','Lucha', 'Tierra'],
     'Agua' : ['Planta', 'Electrico'],
@@ -64,146 +80,146 @@ inmunidades = {
 habilidades = {
     "Impactrueno": {
         "daño": 40,
-        "tipo_habilidad": "efecto",
+        "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Eléctrico",
-        "estado": "paralizado"
+        "estado": EstadoPokemon.PARALIZADO
     },
     "Placaje": {
         "daño": 20,
-        "tipo_habilidad": "multiple",
+        "tipo_habilidad": TipoHabilidad.MULTIPLE,
         "tipo": "Normal",
-        "estado": "normal"
+        "estado": EstadoPokemon.NORMAL
     },
     "Lanzallamas": {
         "daño": 90,
-        "tipo_habilidad": "efecto",
+        "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Fuego",
-        "estado": "quemado"
+        "estado": EstadoPokemon.QUEMADO
     },
     "Hidrobomba": {
         "daño": 110,
-        "tipo_habilidad": "normal",
+        "tipo_habilidad": TipoHabilidad.NORMAL,
         "tipo": "Agua",
-        "estado": "normal"
+        "estado": EstadoPokemon.NORMAL
     },
     "Rayo Hielo": {
         "daño": 80,
-        "tipo_habilidad": "efecto",
+        "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Hielo",
-        "estado": "congelado"
+        "estado": EstadoPokemon.CONGELADO
     },
     "Gigadrenado": {
         "daño": 75,
-        "tipo_habilidad": "normal",
+        "tipo_habilidad": TipoHabilidad.NORMAL,
         "tipo": "Planta",
-        "estado": "normal"
+        "estado": EstadoPokemon.NORMAL
     },
     "Tornado": {
         "daño": 40,
-        "tipo_habilidad": "multiple",
+        "tipo_habilidad": TipoHabilidad.MULTIPLE,
         "tipo": "Volador",
-        "estado": "normal"
+        "estado": EstadoPokemon.NORMAL
     },
     "Golpe Roca": {
         "daño": 50,
-        "tipo_habilidad": "efecto",
+        "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Roca",
-        "estado": "confuso"
+        "estado": EstadoPokemon.CONFUSO
     },
     "Psicorrayo": {
         "daño": 65,
-        "tipo_habilidad": "efecto",
+        "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Psíquico",
-        "estado": "confuso"
+        "estado": EstadoPokemon.CONFUSO
     },
     "Furia Dragón": {
         "daño": 40,
-        "tipo_habilidad": "normal",
+        "tipo_habilidad": TipoHabilidad.NORMAL,
         "tipo": "Dragón",
-        "estado": "normal"
+        "estado": EstadoPokemon.NORMAL
     },
     "Puño Trueno": {
         "daño": 75,
-        "tipo_habilidad": "efecto",
+        "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Eléctrico",
-        "estado": "paralizado"
+        "estado": EstadoPokemon.PARALIZADO
     },
     "Bola Sombra": {
         "daño": 80,
-        "tipo_habilidad": "efecto",
+        "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Fantasma",
-        "estado": "confuso"
+        "estado": EstadoPokemon.CONFUSO
     },
     "Terremoto": {
         "daño": 40,
-        "tipo_habilidad": "multiple",
+        "tipo_habilidad": TipoHabilidad.MULTIPLE,
         "tipo": "Tierra",
-        "estado": "normal"
+        "estado": EstadoPokemon.NORMAL
     },
     "Veneno X": {
         "daño": 60,
-        "tipo_habilidad": "efecto",
+        "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Veneno",
-        "estado": "envenenado"
+        "estado": EstadoPokemon.ENVENENADO
     },
     "Rayo Solar": {
         "daño": 120,
-        "tipo_habilidad": "normal",
+        "tipo_habilidad": TipoHabilidad.NORMAL,
         "tipo": "Planta",
-        "estado": "normal"
+        "estado": EstadoPokemon.NORMAL
     },
     "Colmillo Ígneo": {
         "daño": 65,
-        "tipo_habilidad": "efecto",
+        "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Fuego",
-        "estado": "quemado"
+        "estado": EstadoPokemon.QUEMADO
     },
     "Ataque Ala": {
         "daño": 60,
-        "tipo_habilidad": "normal",
+        "tipo_habilidad": TipoHabilidad.NORMAL,
         "tipo": "Volador",
-        "estado": "normal"
+        "estado": EstadoPokemon.NORMAL
     },
     "Chispazo": {
         "daño": 30,
-        "tipo_habilidad": "multiple",
+        "tipo_habilidad": TipoHabilidad.MULTIPLE,
         "tipo": "Eléctrico",
-        "estado": "normal"
+        "estado": EstadoPokemon.NORMAL
     },
     "Pistola Agua": {
         "daño": 40,
-        "tipo_habilidad": "normal",
+        "tipo_habilidad": TipoHabilidad.NORMAL,
         "tipo": "Agua",
-        "estado": "normal"
+        "estado": EstadoPokemon.NORMAL
     },
     "Alarido": {
         "daño": 55,
-        "tipo_habilidad": "efecto",
+        "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Siniestro",
         "estado": "confuso"
     },
     "Doble Golpe": {
         "daño": 15,
-        "tipo_habilidad": "multiple",
+        "tipo_habilidad": TipoHabilidad.MULTIPLE,
         "tipo": "Normal",
-        "estado": "normal"
+        "estado": EstadoPokemon.NORMAL
     },
     "Colmillo Rayo": {
         "daño": 65,
-        "tipo_habilidad": "efecto",
+        "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Eléctrico",
-        "estado": "paralizado"
+        "estado": EstadoPokemon.PARALIZADO
     },
     "Polvo Veneno": {
         "daño": 0,
-        "tipo_habilidad": "efecto",
+        "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Veneno",
-        "estado": "envenenado"
+        "estado": EstadoPokemon.ENVENENADO
     },
     "Hipnosis": {
         "daño": 0,
-        "tipo_habilidad": "efecto",
+        "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Psíquico",
-        "estado": "dormido"
+        "estado": EstadoPokemon.DORMIDO
     }
 }
