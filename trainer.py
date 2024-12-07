@@ -1,4 +1,4 @@
-from EquipoPokemon import EquipoPokemon
+from equipo_pokemon import EquipoPokemon
 
 class Trainer:
     def __init__(self, Nombre: str, Edad: int, Ciudad: str, Equipo: EquipoPokemon):
@@ -16,4 +16,7 @@ class Trainer:
         self.medallas + 1
 
     def mostrarMedallas(self):
-        return self.medallas 
+        return self.medallas
+    
+    def seleccionarPokemon(self, indice: int):
+        self.Equipo.cambiarActivo(indice)
