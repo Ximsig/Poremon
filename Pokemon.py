@@ -1,5 +1,5 @@
 import random
-from base_conocimiento import efectividades, inmunidades, debilidades, habilidades, EstadoPokemon, TipoHabilidad
+from base_conocimientos import *
 
 class Pokemon:
     def __init__ (self,nombre,salud,habilidades,tipo,velocidad): #Constructor
@@ -17,23 +17,24 @@ class Pokemon:
             print(f"Habilidad {habilidad} no está definida.")
             return
         
-        info_habilidad = habilidades[habilidad]
+        datos = habilidades[habilidad]
         if habilidad in self.habilidades:
-            danyo = info_habilidad["daño"]
-            if info_habilidad["tipo_habilidad"] == TipoHabilidad.MULTIPLE: #Si es una habilidad que se activa multiples veces
+            danyo = datos["daño"]
+            if datos["tipo_habilidad"] == TipoHabilidad.MULTIPLE: #Si es una habilidad que se activa multiples veces
                 veces = random.randint(1,5)
-                for i in range(veces):
-                    enemigo.RecibirDanyo(danyo,info_habilidad["tipo"])
+                for i in range(veces - 1):
+                    danyo += datos["daño"]
+                enemigo.RecibirDanyo(danyo,datos["tipo"])
                 print(f"{self.nombre} ha atacado {veces} veces")
             
-            elif info_habilidad["tipo_habilidad"] == TipoHabilidad.EFECTO: #Si es una habilidad que puede otorgar efectos
-                enemigo.RecibirDanyo(danyo,info_habilidad["tipo"])
+            elif datos["tipo_habilidad"] == TipoHabilidad.EFECTO: #Si es una habilidad que puede otorgar efectos
+                enemigo.RecibirDanyo(danyo,datos["tipo"])
                 if random.random() <= 0.5:
-                    estado = info_habilidad["estado"]
-                    print(f"{self.nombre} esta {estado}")
+                    estado = datos["estado"]
+                    print(f"{enemigo.nombre} esta {estado}")
                     enemigo.CambiarEstado(estado)
             else:
-                enemigo.RecibirDanyo(danyo,info_habilidad["tipo"])
+                enemigo.RecibirDanyo(danyo,datos["tipo"])
         else:
             print(f"{habilidad} no pertenece a {self.nombre}\n")
             
@@ -44,8 +45,10 @@ class Pokemon:
             return
         
         if tipo in debilidades[self.tipo]:
+            print("Es poco efectivo")
             danyo *= 0.5
         if tipo in efectividades[self.tipo]:
+            print("Es muy efectivo")
             danyo *= 2
         
         self.salud -= danyo
@@ -53,7 +56,7 @@ class Pokemon:
             self.salud = 0
             print(f"{self.nombre} ha sido derrotado")
         else:
-            print(f"{self.nombre} ahora tiene {self.salud} puntos de salud")
+            print(f"\n{self.nombre} ahora tiene {self.salud} puntos de salud\n")
             
     def CambiarEstado(self,estado): #Retorna el estado actual del pokemon
         self.estado = estado
@@ -142,14 +145,13 @@ class Pokemon:
     
     def MostrarHabilidades(self):
         for habilidad in self.habilidades:
-            if habilidad in habilidades:
-                info_habilidad = habilidades[habilidad]
-                print(f"Habilidad: {habilidad}")
-                print(f"  Daño: {info_habilidad['daño']}")
-                print(f"  Tipo: {info_habilidad['tipo']}")
-                print(f"  Tipo de Habilidad: {info_habilidad['tipo_habilidad'].value}")
-                print(f"  Estado: {info_habilidad['estado'].value}")
-                print("-" * 30)
+            datos = habilidades[habilidad]
+            print(f"Habilidad: {habilidad}", end=" ")
+            print(f"  Daño: {datos['daño']}", end=" ")
+            print(f"  Tipo: {datos['tipo']}", end=" ")
+            print(f"  Tipo de Habilidad: {datos['tipo_habilidad'].value}", end=" ")
+            print(f"  Estado: {datos['estado'].value}")
+            print("_" * 30)
     
     def MostrarDatos(self): #Muestra todos los datos del pokemon
         print(self.nombre)

@@ -1,10 +1,11 @@
 from pokemon import Pokemon
+from base_conocimientos import *
 from trainer import Trainer
 from equipo_pokemon import EquipoPokemon
 
 def iniciar_batalla(entrenador1, entrenador2):
     print("¡Comienza la batalla Pokémon!")
-    
+
     while entrenador1.Equipo.equipoVivo() and entrenador2.Equipo.equipoVivo():
         turno(entrenador1, entrenador2)
         if not entrenador2.Equipo.equipoVivo():
@@ -27,28 +28,38 @@ def turno(atacante, defensor):
         return
 
     # Seleccionar habilidad
-    print(f"{atacante.Nombre} elige una habilidad para {atacante_pokemon.nombre}: {atacante_pokemon.MostrarHabilidades()}")
-    habilidad = input("Escribe el nombre de la habilidad: ")
-    
-    # Validar habilidad y atacar
-    if habilidad in atacante_pokemon.habilidades:
-        atacante_pokemon.Ataque(habilidad, defensor_pokemon)
-        
-        if defensor_pokemon.salud <= 0:
-            print(f"{defensor_pokemon.nombre} ha sido derrotado.")
+    print(f"{atacante.Nombre}, elige una habilidad para {atacante_pokemon.nombre}:")
+    print("_"*30)
+    atacante_pokemon.MostrarHabilidades()
+
+    while True:
+        try:
+            habilidad = input("Escribe la habilidad: ")
+            if habilidad not in atacante_pokemon.habilidades:
+                print("Habilidad incorrecta")
+            else:
+                break
+        except ValueError:
+            print("Por favor, escribe una habilidad válida.")
+
+    # Atacar
+    atacante_pokemon.Ataque(habilidad, defensor_pokemon)
+
+    if defensor_pokemon.salud <= 0:
+        print(f"{defensor_pokemon.nombre} ha sido derrotado.")
+        if defensor.Equipo.equipoVivo():
             cambiar_pokemon(defensor)
-    else:
-        print("¡Habilidad no válida!")
 
 def cambiar_pokemon(entrenador):
     print(f"{entrenador.Nombre}, selecciona otro Pokémon:")
     for i, pokemon in enumerate(entrenador.Equipo.Pokemons):
         if pokemon.salud > 0:
-            print(f"{i}. {pokemon.nombre} (Salud: {pokemon.salud})")
+            print(f"{i}. {pokemon.nombre} (Salud: {pokemon.salud}/{pokemon.saludMaxima})")
+
     while True:
         try:
-            indice = int(input("Escribe el índice del Pokémon: "))
-            if 0 <= indice < len(entrenador.Equipo.Pokemons) and entrenador.Equipo.Pokemons[indice].salud > 0:
+            indice = input("Escribe el nombre del Pokémon: ")
+            if pokemon in entrenador.Equipo.Pokemons:
                 entrenador.seleccionarPokemon(indice)
                 print(f"{entrenador.Nombre} ha seleccionado a {entrenador.Equipo.activo.nombre}")
                 break
@@ -58,9 +69,10 @@ def cambiar_pokemon(entrenador):
             print("Por favor, escribe un número válido.")
 
 if __name__ == "__main__":
-    pikachu = Pokemon("Pikachu", 200, ["Impactrueno","Placaje"], "Electrico", 40)
-    charmander = Pokemon("Charmander", 170, ["Colmillo Ígneo","Lanzallamas"], "Fuego", 35)
-    squirtle = Pokemon("Squirtle", 180, ["Hidrobomba","Pistola Agua","Placaje"], "Agua", 30)
+    pikachu = Pokemon("Pikachu", 200, ["Impactrueno", "Placaje"], "Electrico", 40)
+    charmander = Pokemon("Charmander", 170, ["Colmillo Ígneo", "Lanzallamas"], "Fuego", 35)
+    squirtle = Pokemon("Squirtle", 180, ["Hidrobomba", "Pistola Agua", "Placaje"], "Agua", 30)
+
 
     equipo1 = EquipoPokemon([pikachu, squirtle])
     equipo2 = EquipoPokemon([charmander])
