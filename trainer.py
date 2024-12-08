@@ -18,5 +18,5 @@ class Trainer:
     def mostrarMedallas(self):
         return self.medallas
     
-    def seleccionarPokemon(self, indice: int):
+    def seleccionarPokemon(self, indice):
         self.Equipo.cambiarActivo(indice)
