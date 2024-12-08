@@ -1,5 +1,4 @@
-
-from EquipoPokemon import EquipoPokemon
+from equipo_pokemon import EquipoPokemon
 
 class Trainer:
     def __init__(self, Nombre: str, Edad: int, Ciudad: str, Equipo: EquipoPokemon):

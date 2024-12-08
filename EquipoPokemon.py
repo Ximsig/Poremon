@@ -1,5 +1,4 @@
-
-from Pokemon import *
+from pokemon import *
 
 class EquipoPokemon:
     def __init__(self, Pokemons: list[Pokemon]):
