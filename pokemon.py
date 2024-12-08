@@ -1,61 +1,57 @@
-from enum import Enum
 import random
-
-class EstadoPokemon(Enum):
-    NORMAL = "normal"
-    ENVENENADO = "envenenado"
-    PARALIZADO = "paralizado"
-    DORMIDO = "dormido"
-    QUEMADO = "quemado"
-    CONFUSO = "confuso"
-
-class TipoHabilidad(Enum):
-    NORMAL = "normal"
-    EFECTO = "efecto"
-    MULTIPLE = "multiple"
+from base_conocimiento import efectividades, inmunidades, debilidades, habilidades, EstadoPokemon, TipoHabilidad
 
 class Pokemon:
-    def _init_ (self,nombre,salud,habilidades,tipo): #Constructor
+    def __init__ (self,nombre,salud,habilidades,tipo,velocidad): #Constructor
         self.nombre = nombre
         self.salud = salud
         self.saludMaxima = salud
         self.habilidades = habilidades
         self.tipo = tipo
         self.estado = EstadoPokemon.NORMAL
+        self.velocidad = velocidad
     
     def Ataque(self,habilidad,enemigo): #El pokemon ataca al enemigo con una habilidad
         
-        if "danyo" not in habilidad or "tipo_habilidad" not in habilidad:
-            print("Error: Habilidad mal definida.")
+        if habilidad not in habilidades:
+            print(f"Habilidad {habilidad} no está definida.")
             return
         
-        nombre = habilidad["nombre"]
-        if nombre in self.habilidades:
-            danyo = self.habilidades[nombre]["danyo"]
-            if habilidad["tipo_habilidad"] == TipoHabilidad.MULTIPLE: #Si es una habilidad que se activa multiples veces
+        info_habilidad = habilidades[habilidad]
+        if habilidad in self.habilidades:
+            danyo = info_habilidad["daño"]
+            if info_habilidad["tipo_habilidad"] == TipoHabilidad.MULTIPLE: #Si es una habilidad que se activa multiples veces
                 veces = random.randint(1,5)
                 for i in range(veces):
-                    enemigo.RecibirDanyo(danyo,habilidad["tipo"])
+                    enemigo.RecibirDanyo(danyo,info_habilidad["tipo"])
                 print(f"{self.nombre} ha atacado {veces} veces")
             
-            elif habilidad["tipo_habilidad"] == TipoHabilidad.EFECTO: #Si es una habilidad que puede otorgar efectos
-                enemigo.RecibirDanyo(danyo)
+            elif info_habilidad["tipo_habilidad"] == TipoHabilidad.EFECTO: #Si es una habilidad que puede otorgar efectos
+                enemigo.RecibirDanyo(danyo,info_habilidad["tipo"])
                 if random.random() <= 0.5:
-                    estado = habilidad["estado"]
+                    estado = info_habilidad["estado"]
+                    print(f"{self.nombre} esta {estado}")
                     enemigo.CambiarEstado(estado)
             else:
-                enemigo.RecibirDanyo(danyo)
+                enemigo.RecibirDanyo(danyo,info_habilidad["tipo"])
+        else:
+            print(f"{habilidad} no pertenece a {self.nombre}\n")
             
     def RecibirDanyo(self,danyo,tipo): #Recibe daño en base del ataque anterior y de su tipo
-        if tipo in debilidades:
+        
+        if tipo in inmunidades[self.tipo]:
+            print("No ha tenido efecto")
+            return
+        
+        if tipo in debilidades[self.tipo]:
             danyo *= 0.5
-        elif tipo in criticos:
+        if tipo in efectividades[self.tipo]:
             danyo *= 2
+        
         self.salud -= danyo
         if self.salud <= 0:
             self.salud = 0
             print(f"{self.nombre} ha sido derrotado")
-        
         else:
             print(f"{self.nombre} ahora tiene {self.salud} puntos de salud")
             
@@ -77,6 +73,7 @@ class Pokemon:
             EstadoPokemon.PARALIZADO: self.paralizado,
             EstadoPokemon.DORMIDO: self.dormido,
             EstadoPokemon.CONFUSO: self.confuso,
+            EstadoPokemon.CONGELADO: self.congelado,
         }
 
         if self.estado in estados_efectos:
@@ -87,6 +84,7 @@ class Pokemon:
     def envenenado(self):
         if random.random() < 0.2:
             self.estado = EstadoPokemon.NORMAL
+            print(f"{self.nombre} se ha recuperado del veneno")
         else:
             self.salud -= 5
             if self.salud <= 0:
@@ -96,6 +94,7 @@ class Pokemon:
     def quemado(self):
         if random.random() < 0.2:
             self.estado = EstadoPokemon.NORMAL
+            print(f"{self.nombre} se ha recuperado del fuego")
         else:
             self.salud -= 5
             if self.salud <= 0:
@@ -105,6 +104,7 @@ class Pokemon:
     def paralizado(self):
         if random.random() < 0.5:
             self.estado = EstadoPokemon.NORMAL
+            print(f"{self.nombre} se ha recuperado de su paralisis")
         else:
             return False
         
@@ -113,23 +113,50 @@ class Pokemon:
     def dormido(self):
         if random.random() < 0.5:
             self.estado = EstadoPokemon.NORMAL
+            print(f"{self.nombre} se ha despertado")
         else:
             return False
 
     def confuso(self):
         if random.random() < 0.5:
             self.estado = EstadoPokemon.NORMAL
+            print(f"{self.nombre} ha recuperado su razon")
         else:
             auto_danyo = random.randint(5,15)
             self.salud -= auto_danyo
             return False
         
         return True
-
+    
+    def congelado(self):
+        if random.random() < 0.5:
+            self.estado = EstadoPokemon.NORMAL
+            print(f"{self.nombre} se ha descongelado")
+        else:
+            return False
+        
+        return True
+    
+    def Velocidad(self):
+        return self.velocidad
+    
+    def MostrarHabilidades(self):
+        for habilidad in self.habilidades:
+            if habilidad in habilidades:
+                info_habilidad = habilidades[habilidad]
+                print(f"Habilidad: {habilidad}")
+                print(f"  Daño: {info_habilidad['daño']}")
+                print(f"  Tipo: {info_habilidad['tipo']}")
+                print(f"  Tipo de Habilidad: {info_habilidad['tipo_habilidad'].value}")
+                print(f"  Estado: {info_habilidad['estado'].value}")
+                print("-" * 30)
+    
     def MostrarDatos(self): #Muestra todos los datos del pokemon
         print(self.nombre)
         print(self.salud)
         print(self.saludMaxima)
         print(self.habilidades)
         print(self.tipo)
-        print(self.estado)
+        print(self.estado.value)
+        print("\n")
+
