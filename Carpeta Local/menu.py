@@ -1,3 +1,4 @@
+from randomizer import sortear_torneo, mostrar_bracket  # Importar el randomizador y la función para mostrar brackets
 from trainer import Trainer
 from EquipoPokemon import EquipoPokemon
 from base_conocimiento import mostrar_habilidades
@@ -7,7 +8,7 @@ def menu():
     Menú principal del programa.
     """
     salir = False
-    entrenadores = []
+    entrenadores = []  # Lista para almacenar a los entrenadores
 
     while not salir:
         print("\n" + "="*40)
@@ -24,6 +25,7 @@ def menu():
             opcion = int(input("Selecciona una opción: "))
             print()  # Línea en blanco para separación
             if opcion == 1:
+                # Añadir un entrenador
                 print("Has seleccionado 'Añadir entrenador'.")
                 nombre = input("Nombre del entrenador: ")
                 edad = int(input("Edad del entrenador: "))
@@ -33,6 +35,7 @@ def menu():
                 entrenadores.append(nuevo_entrenador)
                 print(f"Entrenador {nombre} añadido con éxito.")
             elif opcion == 2:
+                # Elegir el equipo Pokémon para un entrenador
                 print("Has seleccionado 'Elegir tu equipo Pokémon'.")
                 if not entrenadores:
                     print("No hay entrenadores añadidos. Agrega un entrenador primero.")
@@ -47,13 +50,20 @@ def menu():
                     else:
                         print("Índice de entrenador no válido.")
             elif opcion == 3:
+                # Consultar la base de conocimientos
                 print("Has seleccionado 'Consultar base de conocimientos'.")
                 mostrar_habilidades()
             elif opcion == 4:
+                # Comenzar el sorteo del torneo con brackets
                 print("Has seleccionado 'Comenzar sorteo del Torneo'.")
-                # Aquí llamará al randomizador del torneo cuando esté implementado
-                print("Funcionalidad en desarrollo.")
+                if len(entrenadores) < 2:
+                    print("Debe haber al menos 2 entrenadores para comenzar un torneo.")
+                else:
+                    bracket = sortear_torneo(entrenadores)
+                    print("\n¡El torneo se ha sorteado con éxito! Aquí están los brackets:")
+                    mostrar_bracket(bracket)
             elif opcion == 5:
+                # Salir del programa
                 print("Saliendo del programa. ¡Hasta pronto!")
                 salir = True
             else:
