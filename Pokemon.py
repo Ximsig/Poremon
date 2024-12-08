@@ -1,5 +1,5 @@
 import random
-from base_conocimientos import efectividades, inmunidades, debilidades, habilidades, EstadoPokemon, TipoHabilidad
+from base_conocimiento import efectividades, inmunidades, debilidades, habilidades, EstadoPokemon, TipoHabilidad
 
 class Pokemon:
     def __init__ (self,nombre,salud,habilidades,tipo,velocidad): #Constructor
