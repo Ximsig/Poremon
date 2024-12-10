@@ -1,9 +1,9 @@
 from pokemon import Pokemon
-from base_conocimientos import *
+from base_conocimiento import *
 from trainer import Trainer
-from equipo_pokemon import EquipoPokemon
+from EquipoPokemon import EquipoPokemon
 
-def iniciar_batalla(entrenador1, entrenador2):
+def iniciar_batalla(entrenador1 : Trainer, entrenador2 : Trainer) -> None:
     print("¡Comienza la batalla Pokémon!")
 
     while entrenador1.Equipo.equipoVivo() and entrenador2.Equipo.equipoVivo():
@@ -28,7 +28,7 @@ def iniciar_batalla(entrenador1, entrenador2):
                 print(f"¡{entrenador1.Nombre} gana la batalla!")
                 return
 
-def turno(atacante, defensor):
+def turno(atacante : Trainer, defensor : Trainer) -> None:
     atacante_pokemon = atacante.Equipo.activo
     defensor_pokemon = defensor.Equipo.activo
     
@@ -43,53 +43,49 @@ def turno(atacante, defensor):
     # Seleccionar habilidad
     print("\n")
     print(f"{atacante.Nombre}, elige una habilidad para {atacante_pokemon.nombre}:")
-
-    while True:
-        try:
-            opcion = input("Escribe tu opcion: ")
-            if opcion.lower() == "cambio":
-                cambiar_pokemon(atacante)
-                break
-            elif opcion not in atacante_pokemon.habilidades:
-                print("Habilidad incorrecta")
-            else:
+    
+    turno = True
+    while turno:
+        opcion = input("Escribe tu opcion: ")
+        if opcion.lower() == "cambio":
+            CambiarPokemon(atacante)
+            turno = False
+        elif opcion in atacante_pokemon.habilidades:
+            if atacante_pokemon.Estado():
                 atacante_pokemon.Ataque(opcion,defensor_pokemon)
-                break
-        except ValueError:
+            turno = False
+        else:
             print("Por favor, escribe una opcion válida.")
 
     if defensor_pokemon.salud <= 0:
-        print(f"{defensor_pokemon.nombre} ha sido derrotado.")
         if defensor.Equipo.equipoVivo():
-            cambiar_pokemon(defensor)
+            CambiarPokemon(defensor)
 
-def cambiar_pokemon(entrenador):
+def CambiarPokemon(entrenador : Trainer) -> None:
     print(f"{entrenador.Nombre}, selecciona otro Pokémon:")
     for i, pokemon in enumerate(entrenador.Equipo.Pokemons):
         if pokemon.salud > 0:
             print(f"{i}. {pokemon.nombre} (Salud: {pokemon.salud}/{pokemon.saludMaxima})")
-
-    while True:
+    
+    turno = True
+    while turno:
         encontrado = False
-        try:
-            nombre = input("Escribe el nombre del Pokémon: ")
-            for elem in entrenador.Equipo.Pokemons:
-                if nombre == elem.nombre:
-                    if nombre != entrenador.Equipo.activo:
-                        entrenador.seleccionarPokemon(nombre)
-                        print(f"{entrenador.Nombre} ha seleccionado a {entrenador.Equipo.activo.nombre}")
-                        encontrado = True
-            if encontrado:
-                break
+        nombre = input("Escribe el nombre del Pokémon: ")
+        for elem in entrenador.Equipo.Pokemons:
+            if nombre == elem.nombre and nombre != entrenador.Equipo.activo:
+                entrenador.seleccionarPokemon(nombre)
+                print(f"{entrenador.Nombre} ha seleccionado a {entrenador.Equipo.activo.nombre}")
+                encontrado = True
+        if encontrado:
+            turno = False
+        else:
             print("Índice no válido, el Pokémon seleccionado no puede combatir o no puedes seleccionar al mismo.")
-        except ValueError:
-            print("Por favor, escribe un número válido.")
 
-def MostrarBatalla(atacante, defensor):
+def MostrarBatalla(atacante : Pokemon, defensor : Pokemon) -> None:
     CuadroPokemon(defensor)
     CuadroPokemon(atacante)
     
-def CuadroPokemon(pokemon):
+def CuadroPokemon(pokemon : Pokemon) -> None:
         lista = []
         for i in range(4):
             if i + 1 <= len(pokemon.habilidades):
@@ -134,13 +130,13 @@ def CuadroPokemon(pokemon):
         
 
 if __name__ == "__main__":
-    pikachu = Pokemon("Pikachu", 1, ["Impactrueno", "Placaje","Puño Trueno","Chispazo"], "Electrico", 40)
+    pikachu = Pokemon("Pikachu", 200, ["Impactrueno", "Placaje","Puño Trueno","Chispazo"], "Electrico", 40)
     charmander = Pokemon("Charmander", 170, ["Colmillo Ígneo", "Lanzallamas","Alarido","Furia Dragón"], "Fuego", 35)
     squirtle = Pokemon("Squirtle", 180, ["Hidrobomba", "Pistola Agua", "Placaje","Rayo Hielo"], "Agua", 30)
 
 
     equipo1 = EquipoPokemon([pikachu, squirtle])
-    equipo2 = EquipoPokemon([charmander])
+    equipo2 = EquipoPokemon([charmander, pikachu])
 
     entrenador1 = Trainer("Ash", 10, "Pueblo Paleta", equipo1)
     entrenador2 = Trainer("Gary", 11, "Ciudad Verde", equipo2)
