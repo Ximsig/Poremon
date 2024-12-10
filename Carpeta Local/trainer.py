@@ -18,5 +18,10 @@ class Trainer:
     def mostrarMedallas(self):
         return self.medallas
     
-    def seleccionarPokemon(self, indice: int):
+    def mostrarEquipo(self):
+        print(f'El equipo de {self.Nombre} es:')
+        for pokemon in self.Equipo.Pokemons:
+            print(f'{pokemon} ' ,end='') 
+    
+    def seleccionarPokemon(self, indice):
         self.Equipo.cambiarActivo(indice)

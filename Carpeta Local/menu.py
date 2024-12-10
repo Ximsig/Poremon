@@ -2,6 +2,7 @@ from randomizer import sortear_torneo, mostrar_bracket  # Importar el randomizad
 from trainer import Trainer
 from EquipoPokemon import EquipoPokemon
 from base_conocimiento import mostrar_habilidades
+from Pokemons import *
 
 def menu():
     """
@@ -26,38 +27,47 @@ def menu():
             print()  # Línea en blanco para separación
             if opcion == 1:
                 # Añadir un entrenador
-                print("Has seleccionado 'Añadir entrenador'.\n")
+                print("Has seleccionado 'Añadir entrenador'.")
                 nombre = input("Nombre del entrenador: ")
                 edad = int(input("Edad del entrenador: "))
                 ciudad = input("Ciudad del entrenador: ")
-                equipo = EquipoPokemon([])  # Por defecto, el entrenador empieza sin Pokémon
-                nuevo_entrenador = Trainer(nombre, edad, ciudad, equipo)
+
+                equipo = []
+                for _ in range(6):  # Elegimos 6 Pokémon
+                    print('\nLista de Pokémon disponibles:')
+                    for idx, pokemon in enumerate(Pokemons):
+                        print(f'{idx} {pokemon.nombre}, ', end='') if idx % 5 != 0 or idx == 0 else print()
+                    
+                    while True:
+                        try:
+                            seleccionar = int(input('\nSelecciona un Pokémon (índice): '))
+                            if 0 <= seleccionar < len(Pokemons):
+                                equipo.append(Pokemons[seleccionar].nombre)
+                                del Pokemons[seleccionar]
+                                break
+                            else:
+                                print("Índice inválido. Por favor selecciona un índice correcto.")
+                        except ValueError:
+                            print("Por favor ingresa un número válido.")
+
+                equipo_entrenador = EquipoPokemon(equipo)
+                nuevo_entrenador = Trainer(nombre, edad, ciudad, equipo_entrenador)
+                nuevo_entrenador.mostrarEquipo()
+
                 entrenadores.append(nuevo_entrenador)
-                print(f"Entrenador {nombre} añadido con éxito.")
+                print(f"\nEntrenador {nombre} añadido con éxito.")
             elif opcion == 2:
-                # Elegir el equipo Pokémon para un entrenador
-                print("\nHas seleccionado 'Elegir tu equipo Pokémon'.")
-                if not entrenadores:
-                    print("No hay entrenadores añadidos. Agrega un entrenador primero.")
-                else:
-                    print("\nEntrenadores disponibles:")
-                    for idx, entrenador in enumerate(entrenadores):
-                        print(f"{idx + 1}. {entrenador.Nombre}")
-                    entrenador_idx = int(input("Selecciona un entrenador por índice: ")) - 1
-                    if 0 <= entrenador_idx < len(entrenadores):
-                        print(f"Seleccionando equipo para {entrenadores[entrenador_idx].Nombre}.")
-                        # Aquí iría la lógica para asignar Pokémon al equipo
-                    else:
-                        print("\nÍndice de entrenador no válido.")
+                # Esta opción está comentada
+                pass
             elif opcion == 3:
                 # Consultar la base de conocimientos
-                print("\nHas seleccionado 'Consultar base de conocimientos'.")
+                print("Has seleccionado 'Consultar base de conocimientos'.")
                 mostrar_habilidades()
             elif opcion == 4:
                 # Comenzar el sorteo del torneo con brackets
-                print("\nHas seleccionado 'Comenzar sorteo del Torneo'.")
+                print("Has seleccionado 'Comenzar sorteo del Torneo'.")
                 if len(entrenadores) < 2:
-                    print("\nDebe haber al menos 2 entrenadores para comenzar un torneo.")
+                    print("Debe haber al menos 2 entrenadores para comenzar un torneo.")
                 else:
                     bracket = sortear_torneo(entrenadores)
                     print("\n¡El torneo se ha sorteado con éxito! Aquí están los brackets:")
@@ -70,6 +80,7 @@ def menu():
                 print("Opción no válida. Intenta de nuevo.")
         except ValueError:
             print("Error: Ingresa un número válido.")
+
 
 # Llamar al menú principal si el script se ejecuta directamente
 if __name__ == "__main__":
