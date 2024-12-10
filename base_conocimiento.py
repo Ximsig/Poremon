@@ -224,3 +224,18 @@ habilidades = {
         "estado": EstadoPokemon.DORMIDO
     }
 }
+
+def mostrar_habilidades():
+    """
+    Muestra todas las habilidades disponibles en la base de conocimiento.
+    """
+    print("Habilidades disponibles en la base de conocimientos:")
+    for habilidad, info in habilidades.items():
+        print(f"Habilidad: {habilidad}")
+        print(f"  Daño: {info['daño']}")
+        print(f"  Tipo: {info['tipo']}")
+        print(f"  Tipo de Habilidad: {info['tipo_habilidad'].value}")
+        estado = info['estado']
+        estado_value = estado.value if isinstance(estado, EstadoPokemon) else estado
+        print(f"  Estado: {estado_value}")
+        print("-" * 30)
