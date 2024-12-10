@@ -40,7 +40,7 @@ def menu():
                 if not entrenadores:
                     print("No hay entrenadores añadidos. Agrega un entrenador primero.")
                 else:
-                    print("Entrenadores disponibles:")
+                    print("\nEntrenadores disponibles:")
                     for idx, entrenador in enumerate(entrenadores):
                         print(f"{idx + 1}. {entrenador.Nombre}")
                     entrenador_idx = int(input("Selecciona un entrenador por índice: ")) - 1
