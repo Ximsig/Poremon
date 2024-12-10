@@ -2,16 +2,16 @@ import random
 from base_conocimientos import *
 
 class Pokemon:
-    def __init__ (self,nombre,salud,habilidades,tipo,velocidad): #Constructor
+    def __init__ (self, nombre : str, salud : int, habilidades : list[str], tipo : str, velocidad : int): #Constructor
         self.nombre = nombre
         self.salud = salud
         self.saludMaxima = salud
         self.habilidades = habilidades
         self.tipo = tipo
-        self.estado = EstadoPokemon.NORMAL
+        self.estado = EstadoPokemon.NORMAL.value
         self.velocidad = velocidad
     
-    def Ataque(self,habilidad,enemigo): #El pokemon ataca al enemigo con una habilidad
+    def Ataque(self, habilidad : str, enemigo): #El pokemon ataca al enemigo con una habilidad
         
         if habilidad not in habilidades:
             print(f"Habilidad {habilidad} no está definida.")
@@ -38,18 +38,18 @@ class Pokemon:
         else:
             print(f"{habilidad} no pertenece a {self.nombre}\n")
             
-    def RecibirDanyo(self,danyo,tipo): #Recibe daño en base del ataque anterior y de su tipo
+    def RecibirDanyo(self, danyo : int, tipo : str): #Recibe daño en base del ataque anterior y de su tipo
         
         if tipo in inmunidades[self.tipo]:
             print("No ha tenido efecto")
             return
         
         if tipo in debilidades[self.tipo]:
-            print("Es poco efectivo")
-            danyo *= 0.5
-        if tipo in efectividades[self.tipo]:
             print("Es muy efectivo")
             danyo *= 2
+        if tipo in efectividades[self.tipo]:
+            print("Es poco efectivo")
+            danyo = danyo // 2
         
         self.salud -= danyo
         if self.salud <= 0:
@@ -58,13 +58,13 @@ class Pokemon:
         else:
             print(f"\n{self.nombre} ahora tiene {self.salud} puntos de salud\n")
             
-    def CambiarEstado(self,estado): #Retorna el estado actual del pokemon
-        self.estado = estado
+    def CambiarEstado(self, estado): #Retorna el estado actual del pokemon
+        self.estado = estado.value
     
     def TipoPokemon(self): #Retorna el tipo del pokemon
         return self.tipo
     
-    def RecibirSalud(self,objeto): #Aumenta salud al darle un objeto
+    def RecibirSalud(self, objeto): #Aumenta salud al darle un objeto
         self.salud += objeto
         if self.salud > self.saludMaxima:
             self.salud = self.saludMaxima
@@ -139,9 +139,6 @@ class Pokemon:
             return False
         
         return True
-    
-    def Velocidad(self):
-        return self.velocidad
     
     def MostrarHabilidades(self):
         for habilidad in self.habilidades:
