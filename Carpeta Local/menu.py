@@ -16,7 +16,7 @@ def menu():
         print("             MENÚ PRINCIPAL")
         print("="*40)
         print("1. Añadir entrenador")
-        print("2. Elegir tu equipo Pokémon")
+        print("2. Mostrar equipos de entrenadores")
         print("3. Consultar base de conocimientos")
         print("4. Comenzar sorteo del Torneo")
         print("5. Salir")
@@ -57,8 +57,17 @@ def menu():
                 entrenadores.append(nuevo_entrenador)
                 print(f"\nEntrenador {nombre} añadido con éxito.")
             elif opcion == 2:
-                # Esta opción está comentada
-                pass
+                # Mostrar equipos de los entrenadores
+                print("Has seleccionado 'Mostrar equipos de entrenadores'.")
+                if not entrenadores:
+                    print("No hay entrenadores registrados.")
+                else:
+                    for idx, entrenador in enumerate(entrenadores, start=1):
+                        print(f"\nEntrenador {idx}: {entrenador.Nombre}")
+                        print(f"Equipo de {entrenador.Nombre}:")
+                        for pokemon in entrenador.Equipo.Pokemons:
+                            print(f"- {pokemon}")
+                        print("\n" + "="*20)  # Separador entre equipos
             elif opcion == 3:
                 # Consultar la base de conocimientos
                 print("Has seleccionado 'Consultar base de conocimientos'.")
@@ -80,6 +89,7 @@ def menu():
                 print("Opción no válida. Intenta de nuevo.")
         except ValueError:
             print("Error: Ingresa un número válido.")
+
 
 
 # Llamar al menú principal si el script se ejecuta directamente
