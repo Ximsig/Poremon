@@ -70,15 +70,18 @@ def cambiar_pokemon(entrenador):
             print(f"{i}. {pokemon.nombre} (Salud: {pokemon.salud}/{pokemon.saludMaxima})")
 
     while True:
+        encontrado = False
         try:
             nombre = input("Escribe el nombre del Pokémon: ")
-            if pokemon in entrenador.Equipo.Pokemons:
-                if nombre != entrenador.Equipo.activo:
-                    entrenador.seleccionarPokemon(nombre)
-                    print(f"{entrenador.Nombre} ha seleccionado a {entrenador.Equipo.activo.nombre}")
-                    break
-            else:
-                print("Índice no válido, el Pokémon seleccionado no puede combatir o no puedes seleccionar al mismo.")
+            for elem in entrenador.Equipo.Pokemons:
+                if nombre == elem.nombre:
+                    if nombre != entrenador.Equipo.activo:
+                        entrenador.seleccionarPokemon(nombre)
+                        print(f"{entrenador.Nombre} ha seleccionado a {entrenador.Equipo.activo.nombre}")
+                        encontrado = True
+            if encontrado:
+                break
+            print("Índice no válido, el Pokémon seleccionado no puede combatir o no puedes seleccionar al mismo.")
         except ValueError:
             print("Por favor, escribe un número válido.")
 
@@ -131,7 +134,7 @@ def CuadroPokemon(pokemon):
         
 
 if __name__ == "__main__":
-    pikachu = Pokemon("Pikachu", 200, ["Impactrueno", "Placaje","Puño Trueno","Chispazo"], "Electrico", 40)
+    pikachu = Pokemon("Pikachu", 1, ["Impactrueno", "Placaje","Puño Trueno","Chispazo"], "Electrico", 40)
     charmander = Pokemon("Charmander", 170, ["Colmillo Ígneo", "Lanzallamas","Alarido","Furia Dragón"], "Fuego", 35)
     squirtle = Pokemon("Squirtle", 180, ["Hidrobomba", "Pistola Agua", "Placaje","Rayo Hielo"], "Agua", 30)
 

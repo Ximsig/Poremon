@@ -59,7 +59,7 @@ class Pokemon:
             print(f"\n{self.nombre} ahora tiene {self.salud} puntos de salud\n")
             
     def CambiarEstado(self, estado): #Retorna el estado actual del pokemon
-        self.estado = estado.value
+        self.estado = estado
     
     def TipoPokemon(self): #Retorna el tipo del pokemon
         return self.tipo
