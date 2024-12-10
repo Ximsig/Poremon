@@ -26,7 +26,7 @@ def menu():
             print()  # Línea en blanco para separación
             if opcion == 1:
                 # Añadir un entrenador
-                print("Has seleccionado 'Añadir entrenador'.")
+                print("Has seleccionado 'Añadir entrenador'.\n")
                 nombre = input("Nombre del entrenador: ")
                 edad = int(input("Edad del entrenador: "))
                 ciudad = input("Ciudad del entrenador: ")
@@ -36,7 +36,7 @@ def menu():
                 print(f"Entrenador {nombre} añadido con éxito.")
             elif opcion == 2:
                 # Elegir el equipo Pokémon para un entrenador
-                print("Has seleccionado 'Elegir tu equipo Pokémon'.")
+                print("\nHas seleccionado 'Elegir tu equipo Pokémon'.")
                 if not entrenadores:
                     print("No hay entrenadores añadidos. Agrega un entrenador primero.")
                 else:
@@ -48,16 +48,16 @@ def menu():
                         print(f"Seleccionando equipo para {entrenadores[entrenador_idx].Nombre}.")
                         # Aquí iría la lógica para asignar Pokémon al equipo
                     else:
-                        print("Índice de entrenador no válido.")
+                        print("\nÍndice de entrenador no válido.")
             elif opcion == 3:
                 # Consultar la base de conocimientos
-                print("Has seleccionado 'Consultar base de conocimientos'.")
+                print("\nHas seleccionado 'Consultar base de conocimientos'.")
                 mostrar_habilidades()
             elif opcion == 4:
                 # Comenzar el sorteo del torneo con brackets
-                print("Has seleccionado 'Comenzar sorteo del Torneo'.")
+                print("\nHas seleccionado 'Comenzar sorteo del Torneo'.")
                 if len(entrenadores) < 2:
-                    print("Debe haber al menos 2 entrenadores para comenzar un torneo.")
+                    print("\nDebe haber al menos 2 entrenadores para comenzar un torneo.")
                 else:
                     bracket = sortear_torneo(entrenadores)
                     print("\n¡El torneo se ha sorteado con éxito! Aquí están los brackets:")
