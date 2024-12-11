@@ -2,7 +2,7 @@ from randomizer import sortear_torneo, mostrar_bracket  # Importar el randomizad
 from trainer import Trainer
 from EquipoPokemon import EquipoPokemon
 from base_conocimiento import mostrar_habilidades
-from Pokemons import *
+from pokemons import *
 
 def menu():
     """

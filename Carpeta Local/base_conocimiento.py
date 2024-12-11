@@ -78,163 +78,148 @@ inmunidades = {
 }
 
 habilidades = {
-    "Impactrueno": { # 0
+    "Impactrueno": {
         "daño": 40,
         "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Eléctrico",
         "estado": EstadoPokemon.PARALIZADO
     },
-    "Placaje": { # 1
+    "Placaje": {
         "daño": 20,
         "tipo_habilidad": TipoHabilidad.MULTIPLE,
         "tipo": "Normal",
         "estado": EstadoPokemon.NORMAL
     },
-    "Lanzallamas": { # 2
+    "Lanzallamas": {
         "daño": 90,
         "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Fuego",
         "estado": EstadoPokemon.QUEMADO
     },
-    "Hidrobomba": { # 3
+    "Hidrobomba": {
         "daño": 110,
         "tipo_habilidad": TipoHabilidad.NORMAL,
         "tipo": "Agua",
         "estado": EstadoPokemon.NORMAL
     },
-    "Rayo Hielo": { # 4
+    "Rayo Hielo": {
         "daño": 80,
         "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Hielo",
         "estado": EstadoPokemon.CONGELADO
     },
-    "Gigadrenado": { # 5
+    "Gigadrenado": {
         "daño": 75,
         "tipo_habilidad": TipoHabilidad.NORMAL,
         "tipo": "Planta",
         "estado": EstadoPokemon.NORMAL
     },
-    "Tornado": { # 6
+    "Tornado": {
         "daño": 40,
         "tipo_habilidad": TipoHabilidad.MULTIPLE,
         "tipo": "Volador",
         "estado": EstadoPokemon.NORMAL
     },
-    "Golpe Roca": { #7
+    "Golpe Roca": {
         "daño": 50,
         "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Roca",
         "estado": EstadoPokemon.CONFUSO
     },
-    "Psicorrayo": { # 8
+    "Psicorrayo": {
         "daño": 65,
         "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Psíquico",
         "estado": EstadoPokemon.CONFUSO
     },
-    "Furia Dragón": { # 9
+    "Furia Dragón": {
         "daño": 40,
         "tipo_habilidad": TipoHabilidad.NORMAL,
         "tipo": "Dragón",
         "estado": EstadoPokemon.NORMAL
     },
-    "Puño Trueno": { # 10
+    "Puño Trueno": {
         "daño": 75,
         "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Eléctrico",
         "estado": EstadoPokemon.PARALIZADO
     },
-    "Bola Sombra": { # 11
+    "Bola Sombra": {
         "daño": 80,
         "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Fantasma",
         "estado": EstadoPokemon.CONFUSO
     },
-    "Terremoto": { # 12
+    "Terremoto": {
         "daño": 40,
         "tipo_habilidad": TipoHabilidad.MULTIPLE,
         "tipo": "Tierra",
         "estado": EstadoPokemon.NORMAL
     },
-    "Veneno X": { # 13
+    "Veneno X": {
         "daño": 60,
         "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Veneno",
         "estado": EstadoPokemon.ENVENENADO
     },
-    "Rayo Solar": { # 14
+    "Rayo Solar": {
         "daño": 120,
         "tipo_habilidad": TipoHabilidad.NORMAL,
         "tipo": "Planta",
         "estado": EstadoPokemon.NORMAL
     },
-    "Colmillo Ígneo": { # 15
+    "Colmillo Ígneo": {
         "daño": 65,
         "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Fuego",
         "estado": EstadoPokemon.QUEMADO
     },
-    "Ataque Ala": { # 16
+    "Ataque Ala": {
         "daño": 60,
         "tipo_habilidad": TipoHabilidad.NORMAL,
         "tipo": "Volador",
         "estado": EstadoPokemon.NORMAL
     },
-    "Chispazo": { # 17
+    "Chispazo": {
         "daño": 30,
         "tipo_habilidad": TipoHabilidad.MULTIPLE,
         "tipo": "Eléctrico",
         "estado": EstadoPokemon.NORMAL
     },
-    "Pistola Agua": { # 18
+    "Pistola Agua": {
         "daño": 40,
         "tipo_habilidad": TipoHabilidad.NORMAL,
         "tipo": "Agua",
         "estado": EstadoPokemon.NORMAL
     },
-    "Alarido": { # 19
+    "Alarido": {
         "daño": 55,
         "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Siniestro",
         "estado": "confuso"
     },
-    "Doble Golpe": { # 20
+    "Doble Golpe": {
         "daño": 15,
         "tipo_habilidad": TipoHabilidad.MULTIPLE,
         "tipo": "Normal",
         "estado": EstadoPokemon.NORMAL
     },
-    "Colmillo Rayo": { # 21
+    "Colmillo Rayo": {
         "daño": 65,
         "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Eléctrico",
         "estado": EstadoPokemon.PARALIZADO
     },
-    "Polvo Veneno": { # 22
+    "Polvo Veneno": {
         "daño": 0,
         "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Veneno",
         "estado": EstadoPokemon.ENVENENADO
     },
-    "Hipnosis": { # 23
+    "Hipnosis": {
         "daño": 0,
         "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Psíquico",
         "estado": EstadoPokemon.DORMIDO
     }
 }
-
-def mostrar_habilidades():
-    """
-    Muestra todas las habilidades disponibles en la base de conocimiento.
-    """
-    print("Habilidades disponibles en la base de conocimientos:")
-    for habilidad, info in habilidades.items():
-        print(f"Habilidad: {habilidad}")
-        print(f"  Daño: {info['daño']}")
-        print(f"  Tipo: {info['tipo']}")
-        print(f"  Tipo de Habilidad: {info['tipo_habilidad'].value}")
-        estado = info['estado']
-        estado_value = estado.value if isinstance(estado, EstadoPokemon) else estado
-        print(f"  Estado: {estado_value}")
-        print("-" * 30)

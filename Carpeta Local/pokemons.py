@@ -1,4 +1,4 @@
-from Pokemon import *
+from pokemon import *
 
 
 Charizard = Pokemon('Charizard', 300, list(habilidades.keys())[14:21:2], 'Fuego', 120)
