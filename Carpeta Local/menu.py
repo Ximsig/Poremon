@@ -63,7 +63,6 @@ def menu():
                     print("No hay entrenadores registrados.")
                 else:
                     for idx, entrenador in enumerate(entrenadores, start=1):
-                        print(f"\nEntrenador {idx}: {entrenador.Nombre}")
                         print(f"Equipo de {entrenador.Nombre}:")
                         for pokemon in entrenador.Equipo.Pokemons:
                             print(f"- {pokemon}")

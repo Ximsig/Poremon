@@ -1,4 +1,4 @@
-from pokemon import Pokemon
+from Pokemon import Pokemon
 from trainer import Trainer
 from EquipoPokemon import EquipoPokemon
 
