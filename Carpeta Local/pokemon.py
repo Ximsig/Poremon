@@ -2,44 +2,47 @@ import random
 from base_conocimiento import *
 
 class Pokemon:
-    def __init__(self, nombre: str, salud: int, habilidades: list[str], tipo: str, velocidad: int):
+    def __init__(self, nombre: str, salud: int, habilidades: list[str], tipo: str, velocidad: int): 
         self.nombre = nombre
         self.salud = salud
         self.saludMaxima = salud
-        self.habilidades = habilidades
-        # Normalizamos el tipo para coincidir con las claves del diccionario
-        self.tipo = tipo.capitalize()
+        # Normalizamos las habilidades
+        self.habilidades = [habilidad.lower().replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u') for habilidad in habilidades]
+        self.tipo = tipo.lower().replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u')
         self.estado = EstadoPokemon.NORMAL.value
         self.velocidad = velocidad
 
     def Ataque(self, habilidad: str, enemigo) -> None:
+        habilidad_original = habilidad  # Conservamos el texto original para mensajes
+        habilidad = habilidad.lower().replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u')
+        if habilidad not in self.habilidades:
+            print(f"Habilidad {habilidad_original} no pertenece a {self.nombre}.")
+            return
+
         if habilidad not in habilidades:
-            print(f"Habilidad {habilidad} no está definida.")
+            print(f"Habilidad {habilidad_original} no está definida en el sistema.")
             return
 
         datos = habilidades[habilidad]
-        if habilidad in self.habilidades:
-            danyo = datos["daño"]
-            if datos["tipo_habilidad"] == TipoHabilidad.MULTIPLE:
-                veces = random.randint(1, 5)
-                for i in range(veces - 1):
-                    danyo += datos["daño"]
-                enemigo.RecibirDanyo(danyo, datos["tipo"])
-                print(f"{self.nombre} ha atacado {veces} veces")
+        danyo = datos["daño"]
+        if datos["tipo_habilidad"] == TipoHabilidad.MULTIPLE:
+            veces = random.randint(1, 5)
+            for _ in range(veces - 1):
+                danyo += datos["daño"]
+            enemigo.RecibirDanyo(danyo, datos["tipo"])
+            print(f"{self.nombre} ha atacado {veces} veces")
 
-            elif datos["tipo_habilidad"] == TipoHabilidad.EFECTO:
-                enemigo.RecibirDanyo(danyo, datos["tipo"])
-                if random.random() <= 0.3:
-                    estado = datos["estado"]
-                    print(f"{enemigo.nombre} está {estado}")
-                    enemigo.CambiarEstado(estado)
-            else:
-                enemigo.RecibirDanyo(danyo, datos["tipo"])
+        elif datos["tipo_habilidad"] == TipoHabilidad.EFECTO:
+            enemigo.RecibirDanyo(danyo, datos["tipo"])
+            if random.random() <= 0.3:
+                estado = datos["estado"]
+                print(f"{enemigo.nombre} está {estado}")
+                enemigo.CambiarEstado(estado)
         else:
-            print(f"{habilidad} no pertenece a {self.nombre}\n")
+            enemigo.RecibirDanyo(danyo, datos["tipo"])
 
     def RecibirDanyo(self, danyo: int, tipo: str) -> None:
-        tipo = tipo.capitalize()
+        tipo = tipo.lower().replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u')
         if tipo not in inmunidades:
             print(f"Tipo {tipo} no reconocido en las inmunidades.")
             return
@@ -146,6 +149,9 @@ class Pokemon:
 
     def MostrarHabilidades(self) -> None:
         for habilidad in self.habilidades:
+            if habilidad not in habilidades:
+                print(f"Habilidad {habilidad} no está definida en el sistema.")
+                continue
             datos = habilidades[habilidad]
             print(f"Habilidad: {habilidad}", end=" ")
             print(f"  Daño: {datos['daño']}", end=" ")

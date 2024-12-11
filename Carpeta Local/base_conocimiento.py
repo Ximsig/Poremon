@@ -14,74 +14,83 @@ class TipoHabilidad(Enum):
     EFECTO = "efecto"
     MULTIPLE = "multiple"
 
-debilidades = {
-    'Acero' : ['Fuego','Lucha', 'Tierra'],
-    'Agua' : ['Planta', 'Electrico'],
-    'Bicho' : ['Fuego', 'Roca', 'Volador'],
-    'Dragon' : ['Dragón', 'Hada', 'Hielo'],
-    'Electrico' : ['Tierra'],
-    'Fantasma' : ['Fantasma', 'Siniestro'],
-    'Fuego' : ['Agua', 'Roca', 'Tierra'],
-    'Hada' : ['Acero', 'Veneno'],
-    'Hielo' : ['Acero', 'Fuego', 'Lucha', 'Roca'],
-    'Lucha' : ['Hada', 'Psíquico', 'Volador'],
-    'Normal' : ['Lucha'],
-    'Planta' : ['Bicho', 'Fuego', 'Hielo', 'Veneno', 'Volador'],
-    'Psiquico' : ['Bicho', 'Fantasma', 'Siniestro'],
-    'Roca' : ['Acero', 'Agua', 'Lucha', 'Planta', 'Tierra'],
-    'Siniestro' : ['Bicho', 'Hada', 'Lucha'],
-    'Tierra' : ['Agua', 'Hielo', 'Planta'],
-    'Veneno' : ['Psíquico', 'Tierra'],
-    'Volador' : ['Eléctrico', 'Hielo', 'Roca']
-}
+def normalize_key(key):
+    return key.lower().replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u')
 
-efectividades = {
+def normalize_dict_keys(original_dict):
+    return {normalize_key(k): [normalize_key(v) for v in values] for k, values in original_dict.items()}
+
+def normalize_dict_values(original_dict):
+    return {normalize_key(k): {sub_k: (normalize_key(v) if isinstance(v, str) else v) for sub_k, v in values.items()} for k, values in original_dict.items()}
+
+debilidades = normalize_dict_keys({
+    'Acero': ['Fuego', 'Lucha', 'Tierra'],
+    'Agua': ['Planta', 'Electrico'],
+    'Bicho': ['Fuego', 'Roca', 'Volador'],
+    'Dragon': ['Dragón', 'Hada', 'Hielo'],
+    'Electrico': ['Tierra'],
+    'Fantasma': ['Fantasma', 'Siniestro'],
+    'Fuego': ['Agua', 'Roca', 'Tierra'],
+    'Hada': ['Acero', 'Veneno'],
+    'Hielo': ['Acero', 'Fuego', 'Lucha', 'Roca'],
+    'Lucha': ['Hada', 'Psiquico', 'Volador'],
+    'Normal': ['Lucha'],
+    'Planta': ['Bicho', 'Fuego', 'Hielo', 'Veneno', 'Volador'],
+    'Psiquico': ['Bicho', 'Fantasma', 'Siniestro'],
+    'Roca': ['Acero', 'Agua', 'Lucha', 'Planta', 'Tierra'],
+    'Siniestro': ['Bicho', 'Hada', 'Lucha'],
+    'Tierra': ['Agua', 'Hielo', 'Planta'],
+    'Veneno': ['Psiquico', 'Tierra'],
+    'Volador': ['Electrico', 'Hielo', 'Roca']
+})
+
+efectividades = normalize_dict_keys({
     'Acero': ['Hada', 'Hielo', 'Roca'],
     'Agua': ['Fuego', 'Roca', 'Tierra'],
-    'Bicho': ['Hada', 'Planta', 'Psíquico'],
-    'Dragon': ['Dragón'],
-    'Eléctrico': ['Agua', 'Volador'],
-    'Fantasma': ['Fantasma', 'Psíquico'],
+    'Bicho': ['Hada', 'Planta', 'Psiquico'],
+    'Dragon': ['Dragon'],
+    'Electrico': ['Agua', 'Volador'],
+    'Fantasma': ['Fantasma', 'Psiquico'],
     'Fuego': ['Acero', 'Bicho', 'Hielo', 'Planta'],
-    'Hada': ['Dragón', 'Lucha', 'Siniestro'],
-    'Hielo': ['Dragón', 'Planta', 'Tierra', 'Volador'],
+    'Hada': ['Dragon', 'Lucha', 'Siniestro'],
+    'Hielo': ['Dragon', 'Planta', 'Tierra', 'Volador'],
     'Lucha': ['Acero', 'Hielo', 'Normal', 'Roca', 'Siniestro'],
     'Normal': [],
     'Planta': ['Agua', 'Roca', 'Tierra'],
-    'Psíquico': ['Lucha', 'Veneno'],
+    'Psiquico': ['Lucha', 'Veneno'],
     'Roca': ['Bicho', 'Fuego', 'Hielo', 'Volador'],
-    'Siniestro': ['Fantasma', 'Psíquico'],
-    'Tierra': ['Eléctrico', 'Fuego', 'Roca', 'Veneno', 'Acero'],
+    'Siniestro': ['Fantasma', 'Psiquico'],
+    'Tierra': ['Electrico', 'Fuego', 'Roca', 'Veneno', 'Acero'],
     'Veneno': ['Hada', 'Planta'],
     'Volador': ['Bicho', 'Lucha', 'Planta']
-}
+})
 
-inmunidades = {
+inmunidades = normalize_dict_keys({
     'Acero': ['Veneno'],
     'Agua': [],
     'Bicho': [],
-    'Dragón': [],
-    'Eléctrico': [],
+    'Dragon': [],
+    'Electrico': [],
     'Fantasma': ['Normal', 'Lucha'],
     'Fuego': [],
-    'Hada': ['Dragón'],
+    'Hada': ['Dragon'],
     'Hielo': [],
     'Lucha': ['Fantasma'],
     'Normal': ['Fantasma'],
     'Planta': [],
-    'Psíquico': ['Fantasma'],
+    'Psiquico': ['Fantasma'],
     'Roca': [],
-    'Siniestro': ['Psíquico'],
-    'Tierra': ['Eléctrico'],
+    'Siniestro': ['Psiquico'],
+    'Tierra': ['Electrico'],
     'Veneno': [],
     'Volador': ['Tierra']
-}
+})
 
-habilidades = {
+habilidades = normalize_dict_values({
     "Impactrueno": {
         "daño": 40,
         "tipo_habilidad": TipoHabilidad.EFECTO,
-        "tipo": "Eléctrico",
+        "tipo": "Electrico",
         "estado": EstadoPokemon.PARALIZADO
     },
     "Placaje": {
@@ -129,19 +138,19 @@ habilidades = {
     "Psicorrayo": {
         "daño": 65,
         "tipo_habilidad": TipoHabilidad.EFECTO,
-        "tipo": "Psíquico",
+        "tipo": "Psiquico",
         "estado": EstadoPokemon.CONFUSO
     },
-    "Furia Dragón": {
+    "Furia Dragon": {
         "daño": 40,
         "tipo_habilidad": TipoHabilidad.NORMAL,
-        "tipo": "Dragón",
+        "tipo": "Dragon",
         "estado": EstadoPokemon.NORMAL
     },
     "Puño Trueno": {
         "daño": 75,
         "tipo_habilidad": TipoHabilidad.EFECTO,
-        "tipo": "Eléctrico",
+        "tipo": "Electrico",
         "estado": EstadoPokemon.PARALIZADO
     },
     "Bola Sombra": {
@@ -168,7 +177,7 @@ habilidades = {
         "tipo": "Planta",
         "estado": EstadoPokemon.NORMAL
     },
-    "Colmillo Ígneo": {
+    "Colmillo Igneo": {
         "daño": 65,
         "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Fuego",
@@ -183,7 +192,7 @@ habilidades = {
     "Chispazo": {
         "daño": 30,
         "tipo_habilidad": TipoHabilidad.MULTIPLE,
-        "tipo": "Eléctrico",
+        "tipo": "Electrico",
         "estado": EstadoPokemon.NORMAL
     },
     "Pistola Agua": {
@@ -196,7 +205,7 @@ habilidades = {
         "daño": 55,
         "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Siniestro",
-        "estado": "confuso"
+        "estado": EstadoPokemon.CONFUSO
     },
     "Doble Golpe": {
         "daño": 15,
@@ -207,7 +216,7 @@ habilidades = {
     "Colmillo Rayo": {
         "daño": 65,
         "tipo_habilidad": TipoHabilidad.EFECTO,
-        "tipo": "Eléctrico",
+        "tipo": "Electrico",
         "estado": EstadoPokemon.PARALIZADO
     },
     "Polvo Veneno": {
@@ -219,7 +228,7 @@ habilidades = {
     "Hipnosis": {
         "daño": 0,
         "tipo_habilidad": TipoHabilidad.EFECTO,
-        "tipo": "Psíquico",
+        "tipo": "Psiquico",
         "estado": EstadoPokemon.DORMIDO
     }
-}
+})
