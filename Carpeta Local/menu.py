@@ -99,8 +99,10 @@ def menu():
 
                 # Progresión del torneo
                 print("\n¡Comienzan las batallas!")
-                for ronda_idx, ronda in enumerate(bracket, start=1):
-                    print(f"\n--- Ronda {ronda_idx} ---")
+                ronda_actual = 1
+                while len(bracket) > 0:
+                    print(f"\n--- Ronda {ronda_actual} ---")
+                    ronda = bracket.pop(0)
                     ganadores = []
                     for enfrentamiento in ronda:
                         entrenador1, entrenador2 = enfrentamiento
@@ -112,16 +114,6 @@ def menu():
                             ganadores.append(entrenador1)
                         elif entrenador2:
                             ganadores.append(entrenador2)
-
-                        # Iniciar la siguiente ronda inmediatamente si solo quedan dos ganadores
-                        if len(ganadores) == 2 and ronda_idx < len(bracket):
-                            print(f"\n--- Ronda {ronda_idx + 1} ---")
-                            siguiente_ronda = [(ganadores[0], ganadores[1])]
-                            mostrar_bracket([siguiente_ronda])
-                            iniciar_batalla(ganadores[0], ganadores[1])
-                            ganador_final = ganadores[0] if ganadores[0].Equipo.equipoVivo() else ganadores[1]
-                            print(f"\n¡El ganador del torneo es {ganador_final.Nombre}!")
-                            return
 
                     print("\nGanadores de esta ronda:")
                     for ganador in ganadores:
@@ -136,9 +128,10 @@ def menu():
                     for i in range(0, len(ganadores), 2):
                         emparejamiento = (ganadores[i], ganadores[i+1] if i+1 < len(ganadores) else None)
                         nueva_ronda.append(emparejamiento)
+                    bracket.append(nueva_ronda)
                     mostrar_bracket([nueva_ronda])
-                    ronda.clear()
-                    ronda.extend(nueva_ronda)
+
+                    ronda_actual += 1
 
         elif opcion == "5":
             print("Gracias por usar el simulador Pokémon. ¡Hasta la próxima!")
