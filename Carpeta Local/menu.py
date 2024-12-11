@@ -98,9 +98,8 @@ def menu():
                 mostrar_bracket(bracket)
 
                 # Progresión del torneo
-                print("\n¡Comienzan las batallas!")
                 ronda_actual = 1
-                while len(bracket) > 0:
+                while bracket:
                     print(f"\n--- Ronda {ronda_actual} ---")
                     ronda = bracket.pop(0)
                     ganadores = []
@@ -128,9 +127,10 @@ def menu():
                     for i in range(0, len(ganadores), 2):
                         emparejamiento = (ganadores[i], ganadores[i+1] if i+1 < len(ganadores) else None)
                         nueva_ronda.append(emparejamiento)
-                    bracket.append(nueva_ronda)
-                    mostrar_bracket([nueva_ronda])
-
+                    bracket = [nueva_ronda]  # Actualizar el bracket solo con la nueva ronda
+                    print("\nBracket del torneo actualizado:")
+                    mostrar_bracket(bracket)
+                    
                     ronda_actual += 1
 
         elif opcion == "5":
