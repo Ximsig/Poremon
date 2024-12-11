@@ -1,96 +1,151 @@
-from randomizer import sortear_torneo, mostrar_bracket  # Importar el randomizador y la función para mostrar brackets
+from randomizer import sortear_torneo, mostrar_bracket
+from batalla import iniciar_batalla
 from trainer import Trainer
 from EquipoPokemon import EquipoPokemon
-from base_conocimiento import mostrar_habilidades
-from pokemons import *
+from pokemons import Pokemons
+import random
 
 def menu():
-    """
-    Menú principal del programa.
-    """
-    salir = False
-    entrenadores = []  # Lista para almacenar a los entrenadores
-
-    while not salir:
+    entrenadores = []
+    while True:
         print("\n" + "="*40)
         print("             MENÚ PRINCIPAL")
         print("="*40)
-        print("1. Añadir entrenador")
-        print("2. Mostrar equipos de entrenadores")
-        print("3. Consultar base de conocimientos")
-        print("4. Comenzar sorteo del Torneo")
+        print("1. Registrar Entrenador")
+        print("2. Mostrar Entrenadores Registrados")
+        print("3. Sortear y Mostrar Bracket")
+        print("4. Iniciar Torneo")
         print("5. Salir")
         print("="*40)
-        
-        try:
-            opcion = int(input("Selecciona una opción: "))
-            print()  # Línea en blanco para separación
-            if opcion == 1:
-                # Añadir un entrenador
-                print("Has seleccionado 'Añadir entrenador'.")
-                nombre = input("Nombre del entrenador: ")
-                edad = int(input("Edad del entrenador: "))
-                ciudad = input("Ciudad del entrenador: ")
 
-                equipo = []
-                for _ in range(6):  # Elegimos 6 Pokémon
-                    print('\nLista de Pokémon disponibles:')
-                    for idx, pokemon in enumerate(Pokemons):
-                        print(f'{idx} {pokemon.nombre}, ', end='') if idx % 5 != 0 or idx == 0 else print()
-                    
-                    while True:
-                        try:
-                            seleccionar = int(input('\nSelecciona un Pokémon (índice): '))
-                            if 0 <= seleccionar < len(Pokemons):
-                                equipo.append(Pokemons[seleccionar].nombre)
-                                del Pokemons[seleccionar]
-                                break
-                            else:
-                                print("Índice inválido. Por favor selecciona un índice correcto.")
-                        except ValueError:
-                            print("Por favor ingresa un número válido.")
+        opcion = input("Selecciona una opción: ").strip()
 
-                equipo_entrenador = EquipoPokemon(equipo)
-                nuevo_entrenador = Trainer(nombre, edad, ciudad, equipo_entrenador)
-                nuevo_entrenador.mostrarEquipo()
+        if opcion == "1":
+            while True:
+                try:
+                    nombre = input("Nombre del entrenador: ").strip()
+                    if not nombre:
+                        raise ValueError("El nombre no puede estar vacío.")
+                    break
+                except ValueError as e:
+                    print(e)
 
-                entrenadores.append(nuevo_entrenador)
-                print(f"\nEntrenador {nombre} añadido con éxito.")
-            elif opcion == 2:
-                # Mostrar equipos de los entrenadores
-                print("Has seleccionado 'Mostrar equipos de entrenadores'.")
-                if not entrenadores:
-                    print("No hay entrenadores registrados.")
-                else:
-                    for idx, entrenador in enumerate(entrenadores, start=1):
-                        print(f"Equipo de {entrenador.Nombre}:")
-                        for pokemon in entrenador.Equipo.Pokemons:
-                            print(f"- {pokemon}")
-                        print("\n" + "="*20)  # Separador entre equipos
-            elif opcion == 3:
-                # Consultar la base de conocimientos
-                print("Has seleccionado 'Consultar base de conocimientos'.")
-                mostrar_habilidades()
-            elif opcion == 4:
-                # Comenzar el sorteo del torneo con brackets
-                print("Has seleccionado 'Comenzar sorteo del Torneo'.")
-                if len(entrenadores) < 2:
-                    print("Debe haber al menos 2 entrenadores para comenzar un torneo.")
-                else:
-                    bracket = sortear_torneo(entrenadores)
-                    print("\n¡El torneo se ha sorteado con éxito! Aquí están los brackets:")
-                    mostrar_bracket(bracket)
-            elif opcion == 5:
-                # Salir del programa
-                print("Saliendo del programa. ¡Hasta pronto!")
-                salir = True
+            while True:
+                try:
+                    edad = int(input("Edad del entrenador: "))
+                    if edad <= 0:
+                        raise ValueError("La edad debe ser un número positivo.")
+                    break
+                except ValueError:
+                    print("Por favor ingresa un número válido para la edad.")
+
+            while True:
+                try:
+                    ciudad = input("Ciudad del entrenador: ").strip()
+                    if not ciudad:
+                        raise ValueError("La ciudad no puede estar vacía.")
+                    break
+                except ValueError as e:
+                    print(e)
+
+            equipo = []
+            num_pokemons_por_equipo = int(input("Numero de pokemons por equipo: "))
+            for _ in range(num_pokemons_por_equipo):  # Elegimos el número configurado de Pokémon
+                print('\nLista de Pokémon disponibles:')
+                for idx, pokemon in enumerate(Pokemons):
+                    print(f'{idx} {pokemon.nombre}, ', end='') if idx % 5 != 0 or idx == 0 else print()
+                
+                while True:
+                    try:
+                        seleccionar = int(input('\nSelecciona un Pokémon (índice): '))
+                        if 0 <= seleccionar < len(Pokemons):
+                            equipo.append(Pokemons[seleccionar])
+                            del Pokemons[seleccionar]
+                            break
+                        else:
+                            print("Índice inválido. Por favor selecciona un índice correcto.")
+                    except ValueError:
+                        print("Por favor ingresa un número válido.")
+
+            equipo_entrenador = EquipoPokemon(equipo)
+            entrenador = Trainer(nombre, edad, ciudad, equipo_entrenador)
+            entrenadores.append(entrenador)
+            print(f"Entrenador {nombre} registrado con éxito.")
+
+        elif opcion == "2":
+            if not entrenadores:
+                print("No hay entrenadores registrados.")
             else:
-                print("Opción no válida. Intenta de nuevo.")
-        except ValueError:
-            print("Error: Ingresa un número válido.")
+                for entrenador in entrenadores:
+                    print(f"Entrenador: {entrenador.Nombre}, Ciudad: {entrenador.Ciudad}")
+                    print(f"El equipo de {entrenador.Nombre} es:")
+                    for pokemon in entrenador.Equipo.Pokemons:
+                        print(f"- {pokemon.nombre} (Salud: {pokemon.salud}/{pokemon.saludMaxima}, Tipo: {pokemon.tipo.capitalize()})")
 
+        elif opcion == "3":
+            if len(entrenadores) < 2:
+                print("Se necesitan al menos 2 entrenadores para el sorteo.")
+            else:
+                bracket = sortear_torneo(entrenadores)
+                mostrar_bracket(bracket)
 
+        elif opcion == "4":
+            if len(entrenadores) < 2:
+                print("Se necesitan al menos 2 entrenadores para iniciar un torneo.")
+            else:
+                bracket = sortear_torneo(entrenadores)
+                print("\n¡El torneo se ha sorteado con éxito! Aquí están los brackets:")
+                mostrar_bracket(bracket)
 
-# Llamar al menú principal si el script se ejecuta directamente
+                # Progresión del torneo
+                print("\n¡Comienzan las batallas!")
+                for ronda_idx, ronda in enumerate(bracket, start=1):
+                    print(f"\n--- Ronda {ronda_idx} ---")
+                    ganadores = []
+                    for enfrentamiento in ronda:
+                        entrenador1, entrenador2 = enfrentamiento
+                        if entrenador1 and entrenador2:
+                            iniciar_batalla(entrenador1, entrenador2)
+                            ganador = entrenador1 if entrenador1.Equipo.equipoVivo() else entrenador2
+                            ganadores.append(ganador)
+                        elif entrenador1:
+                            ganadores.append(entrenador1)
+                        elif entrenador2:
+                            ganadores.append(entrenador2)
+
+                        # Iniciar la siguiente ronda inmediatamente si solo quedan dos ganadores
+                        if len(ganadores) == 2 and ronda_idx < len(bracket):
+                            print(f"\n--- Ronda {ronda_idx + 1} ---")
+                            siguiente_ronda = [(ganadores[0], ganadores[1])]
+                            mostrar_bracket([siguiente_ronda])
+                            iniciar_batalla(ganadores[0], ganadores[1])
+                            ganador_final = ganadores[0] if ganadores[0].Equipo.equipoVivo() else ganadores[1]
+                            print(f"\n¡El ganador del torneo es {ganador_final.Nombre}!")
+                            return
+
+                    print("\nGanadores de esta ronda:")
+                    for ganador in ganadores:
+                        print(f"- {ganador.Nombre}")
+
+                    if len(ganadores) == 1:
+                        print(f"\n¡El ganador del torneo es {ganadores[0].Nombre}!")
+                        break
+
+                    # Preparar el bracket para la siguiente ronda
+                    nueva_ronda = []
+                    for i in range(0, len(ganadores), 2):
+                        emparejamiento = (ganadores[i], ganadores[i+1] if i+1 < len(ganadores) else None)
+                        nueva_ronda.append(emparejamiento)
+                    mostrar_bracket([nueva_ronda])
+                    ronda.clear()
+                    ronda.extend(nueva_ronda)
+
+        elif opcion == "5":
+            print("Gracias por usar el simulador Pokémon. ¡Hasta la próxima!")
+            break
+
+        else:
+            print("Opción no válida. Intenta de nuevo.")
+
 if __name__ == "__main__":
     menu()
