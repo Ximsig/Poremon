@@ -5,7 +5,7 @@ from EquipoPokemon import EquipoPokemon
 from pokemons import Pokemons
 import random
 
-def menu():
+def menu() -> None:
     entrenadores = []
     while True:
         print("\n" + "="*40)
@@ -84,7 +84,7 @@ def menu():
 
         elif opcion == "3":
             if len(entrenadores) < 2:
-                print("Se necesitan al menos 2 entrenadores para el sorteo.")
+                print("Se necesitan minimo dos entrenadores para el sorteo.")
             else:
                 bracket = sortear_torneo(entrenadores)
                 mostrar_bracket(bracket)

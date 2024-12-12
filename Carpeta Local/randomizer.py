@@ -12,7 +12,7 @@ def sortear_torneo(entrenadores):
         list: Lista de rondas con los enfrentamientos (listas anidadas).
     """
     if len(entrenadores) < 2:
-        print("Debe haber al menos 2 entrenadores para realizar el torneo.")
+        print("Debe haber minimo dos entrenadores para realizar el torneo.")
         return []
     
     print("\n¡Sorteo del torneo Pokémon!")
