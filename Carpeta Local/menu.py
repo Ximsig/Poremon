@@ -13,9 +13,8 @@ def menu():
         print("="*40)
         print("1. Registrar Entrenador")
         print("2. Mostrar Entrenadores Registrados")
-        print("3. Sortear y Mostrar Bracket")
-        print("4. Iniciar Torneo")
-        print("5. Salir")
+        print("3. Iniciar Torneo")
+        print("4. Salir")
         print("="*40)
 
         opcion = input("Selecciona una opción: ").strip()
@@ -82,14 +81,8 @@ def menu():
                     for pokemon in entrenador.Equipo.Pokemons:
                         print(f"- {pokemon.nombre} (Salud: {pokemon.salud}/{pokemon.saludMaxima}, Tipo: {pokemon.tipo.capitalize()})")
 
-        elif opcion == "3":
-            if len(entrenadores) < 2:
-                print("Se necesitan al menos 2 entrenadores para el sorteo.")
-            else:
-                bracket = sortear_torneo(entrenadores)
-                mostrar_bracket(bracket)
 
-        elif opcion == "4":
+        elif opcion == "3":
             if len(entrenadores) < 2:
                 print("Se necesitan al menos 2 entrenadores para iniciar un torneo.")
             else:
@@ -134,7 +127,7 @@ def menu():
                     
                     ronda_actual += 1
 
-        elif opcion == "5":
+        elif opcion == "4":
             print("Gracias por usar el simulador Pokémon. ¡Hasta la próxima!")
             break
 
