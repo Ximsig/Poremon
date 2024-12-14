@@ -5,7 +5,7 @@ from EquipoPokemon import EquipoPokemon
 from pokemons import Pokemons
 import random
 
-def menu() -> None:
+def menu():
     entrenadores = []
     while True:
         print("\n" + "="*40)
@@ -84,7 +84,7 @@ def menu() -> None:
 
         elif opcion == "3":
             if len(entrenadores) < 2:
-                print("Se necesitan minimo dos entrenadores para el sorteo.")
+                print("Se necesitan al menos 2 entrenadores para el sorteo.")
             else:
                 bracket = sortear_torneo(entrenadores)
                 mostrar_bracket(bracket)
@@ -95,12 +95,12 @@ def menu() -> None:
             else:
                 bracket = sortear_torneo(entrenadores)
                 print("\n¡El torneo se ha sorteado con éxito! Aquí están los brackets:")
-                mostrar_bracket(bracket)
+                mostrar_bracket(bracket, n=1)
 
                 # Progresión del torneo
                 ronda_actual = 1
+                n = 1
                 while bracket:
-                    print(f"\n--- Ronda {ronda_actual} ---")
                     ronda = bracket.pop(0)
                     ganadores = []
                     for enfrentamiento in ronda:
@@ -128,8 +128,9 @@ def menu() -> None:
                         emparejamiento = (ganadores[i], ganadores[i+1] if i+1 < len(ganadores) else None)
                         nueva_ronda.append(emparejamiento)
                     bracket = [nueva_ronda]  # Actualizar el bracket solo con la nueva ronda
+                    n += 1
                     print("\nBracket del torneo actualizado:")
-                    mostrar_bracket(bracket)
+                    mostrar_bracket(bracket, n)
                     
                     ronda_actual += 1
 
