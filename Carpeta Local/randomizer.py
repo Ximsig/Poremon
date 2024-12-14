@@ -12,7 +12,7 @@ def sortear_torneo(entrenadores):
         list: Lista de rondas con los enfrentamientos (listas anidadas).
     """
     if len(entrenadores) < 2:
-        print("Debe haber minimo dos entrenadores para realizar el torneo.")
+        print("Debe haber al menos 2 entrenadores para realizar el torneo.")
         return []
     
     print("\n¡Sorteo del torneo Pokémon!")
@@ -33,19 +33,19 @@ def sortear_torneo(entrenadores):
     return bracket
 
 
-def mostrar_bracket(bracket):
+def mostrar_bracket(bracket, n):
     """
     Muestra los enfrentamientos en formato compacto y legible.
     
     Args:
         bracket (list): Lista de rondas con los enfrentamientos.
     """
-    print("\nBracket del torneo:")
-    for ronda_idx, ronda in enumerate(bracket, start=1):
-        print(f"\nRonda {ronda_idx}:")
+    for ronda in bracket:
+        print(f"\nRonda {n}:")
         linea = ""
         for enfrentamiento in ronda:
             e1 = enfrentamiento[0].Nombre if enfrentamiento[0] else "(vacío)"
             e2 = enfrentamiento[1].Nombre if enfrentamiento[1] else "(vacío)"
             linea += f"({e1}) vs ({e2})    "  # Formato compacto
         print(linea.strip())
+        n += 1
