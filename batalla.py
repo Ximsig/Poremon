@@ -112,7 +112,7 @@ def CuadroPokemon(pokemon : Pokemon) -> None:
     
     salud = str(pokemon.salud) + '/' + str(pokemon.saludMaxima)
     barra_vida = saludPokemon(pokemon.salud,pokemon.saludMaxima)
-    barra_inferior = 'Estado: ' + pokemon.estado.value + '       ' + 'Tipo: ' + pokemon.tipo
+    barra_inferior = 'Estado: ' + pokemon.estado.value + '      ' + 'Tipo: ' + pokemon.tipo
     
     print(f"\n{'****************************************':>50}")
     print(f"{'*':>11}",end = "")

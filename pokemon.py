@@ -129,6 +129,8 @@ class Pokemon: #Clase de tipo Pokemon que servira como esqueleto para todos los 
         else:
             auto_danyo = random.randint(5,15)
             self.salud -= auto_danyo
+            if self.salud <= 0:
+                self.salud = 0
             print(f"{self.nombre} está confuso y se ataca a sí mismo")
             return False
         

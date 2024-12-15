@@ -85,7 +85,7 @@ habilidades = { #Diccionario que contiene las habilidades existentes
         "estado": EstadoPokemon.PARALIZADO
     },
     "Placaje": { # 1
-        "daño": 20,
+        "daño": 30,
         "tipo_habilidad": TipoHabilidad.MULTIPLE,
         "tipo": "Normal",
         "estado": EstadoPokemon.NORMAL
@@ -199,7 +199,7 @@ habilidades = { #Diccionario que contiene las habilidades existentes
         "estado": "confuso"
     },
     "Doble Golpe": { # 20
-        "daño": 15,
+        "daño": 25,
         "tipo_habilidad": TipoHabilidad.MULTIPLE,
         "tipo": "Normal",
         "estado": EstadoPokemon.NORMAL
@@ -211,13 +211,13 @@ habilidades = { #Diccionario que contiene las habilidades existentes
         "estado": EstadoPokemon.PARALIZADO
     },
     "Polvo Veneno": { # 22
-        "daño": 0,
+        "daño": 40,
         "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Veneno",
         "estado": EstadoPokemon.ENVENENADO
     },
     "Hipnosis": { # 23
-        "daño": 0,
+        "daño": 45,
         "tipo_habilidad": TipoHabilidad.EFECTO,
         "tipo": "Psíquico",
         "estado": EstadoPokemon.DORMIDO
