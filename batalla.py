@@ -48,7 +48,7 @@ def turno(atacante : Trainer, defensor : Trainer) -> bool:
     
     turno = True
     while turno: #Mientras que el atacante tenga su turno realiza una opcion
-        opcion = input("Escribe tu opcion: ")
+        opcion = input("Escribe tu opcion (habilidad del pokemon | cambio): ")
         if opcion.lower() == "cambio": #Si desea cambiar de pokemon (pierde turno)
             CambiarPokemon(atacante)
             turno = False
@@ -76,8 +76,8 @@ def CambiarPokemon(entrenador : Trainer) -> None:
     while turno: #Mientras que sea su turno de cambiar digita el pokemon que quiere usar
         encontrado = False
         nombre = input("Escribe el nombre del Pokémon: ")
-        for elem in entrenador.Equipo.Pokemons: #Comprueba si el pokemon digitado está en su equipo
-            if nombre == elem.nombre and nombre != entrenador.Equipo.activo: #Si el pokemon no es el que ya tiene desplegado
+        for elem in entrenador.Equipo.Pokemons: #Recorre todos los pokemons del equipo
+            if nombre == elem.nombre and nombre != entrenador.Equipo.activo: #Comprueba si el pokemon digitado está en su equipo
                 entrenador.seleccionarPokemon(nombre)
                 print(f"{entrenador.Nombre} ha seleccionado a {entrenador.Equipo.activo.nombre}")
                 encontrado = True
