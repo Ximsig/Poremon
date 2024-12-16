@@ -1,5 +1,5 @@
 from randomizer import sortear_torneo, mostrar_bracket
-from batalla import iniciar_batalla
+from batalla import iniciar_batalla, CurarPokemon
 from trainer import Trainer
 from EquipoPokemon import EquipoPokemon
 from pokemons import Pokemons
@@ -102,6 +102,8 @@ def menu():
                             iniciar_batalla(entrenador1, entrenador2)
                             ganador = entrenador1 if entrenador1.Equipo.equipoVivo() else entrenador2
                             ganadores.append(ganador)
+                            CurarPokemon(entrenador1.Equipo.Pokemons)
+                            CurarPokemon(entrenador2.Equipo.Pokemons)
                         elif entrenador1:
                             ganadores.append(entrenador1)
                         elif entrenador2:

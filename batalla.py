@@ -13,29 +13,21 @@ def iniciar_batalla(entrenador1 : Trainer, entrenador2 : Trainer) -> None:
             if turno(entrenador1, entrenador2): #Si el pokemon del contrincante ha muerto
                 if not entrenador2.Equipo.equipoVivo(): #Si ya no tiene equipo vivo
                     print(f"¡{entrenador1.Nombre} gana la batalla!")
-                    CurarPokemon(entrenador1.Equipo.Pokemons)
-                    CurarPokemon(entrenador2.Equipo.Pokemons)
                     return
             else: #Idem
                 if turno(entrenador2, entrenador1):
                     if not entrenador1.Equipo.equipoVivo():
                         print(f"¡{entrenador2.Nombre} gana la batalla!")
-                        CurarPokemon(entrenador2.Equipo.Pokemons)
-                        CurarPokemon(entrenador1.Equipo.Pokemons)
                         return
         else: #Idem
             if turno(entrenador2, entrenador1):
                 if not entrenador1.Equipo.equipoVivo():
                     print(f"¡{entrenador2.Nombre} gana la batalla!")
-                    CurarPokemon(entrenador1.Equipo.Pokemons)
-                    CurarPokemon(entrenador2.Equipo.Pokemons)
                     return
             else: #Idem
                 if turno(entrenador1, entrenador2):
                     if not entrenador2.Equipo.equipoVivo():
                         print(f"¡{entrenador1.Nombre} gana la batalla!")
-                        CurarPokemon(entrenador2.Equipo.Pokemons)
-                        CurarPokemon(entrenador1.Equipo.Pokemons)
                         return
 
 #Ejecuta todos los pasos que se realizan dentro de un turno, teniendo al atacante y al defensor
@@ -170,6 +162,7 @@ def saludPokemon(salud : int, saludMaxima : int) -> str:
 def CurarPokemon(pokemons : list[Pokemon]) -> None:
     for pokemon in pokemons: #Por cada pokemon le da toda la vida
         pokemon.RecibirSalud(999)
+        pokemon.estado = EstadoPokemon.NORMAL
 
 if __name__ == "__main__": #Caso prueba
     Charizard = Pokemon('Charizard', 300, list(habilidades.keys())[14:21:2], 'Fuego', 120)
